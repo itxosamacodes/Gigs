@@ -3,7 +3,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
@@ -21,7 +20,14 @@ const Login = () => {
           <Text style={styles.pageTitel}>Welcome Osama</Text>
         </View>
         <View style={styles.manuBtn}>
-          <Ionicons name="menu" size={40} color={"black"} />
+          <Ionicons
+            name="menu"
+            size={40}
+            color={"black"}
+            onPress={() => {
+              router.push("/(drawer)/menu");
+            }}
+          />
         </View>
       </View>
       <ScrollView>
@@ -71,13 +77,6 @@ const Login = () => {
         <JobCard />
         <JobCard />
         <JobCard />
-        <View style={styles.menuee}>
-          <Image
-            source={require("../../assets/images/hmimg/image.png")}
-            style={styles.img}
-            resizeMode="cover"
-          ></Image>
-        </View>
       </ScrollView>
     </View>
   );
@@ -145,25 +144,6 @@ const styles = StyleSheet.create({
   jblist: {
     fontSize: 23,
     fontWeight: 500,
-  },
-  menuee: {
-    position: "relative",
-    height: 776,
-    width: 282,
-    backgroundColor: "#ffffff4b",
-    borderWidth: 2,
-    borderColor: "red",
-    borderRadius: 10,
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    bottom: 50,
-  },
-  img: {
-    top: 26,
-    right: -12,
-    transform: [{ scaleY: -1 }, { rotate: "270deg" }],
-    borderRadius: 10,
   },
 });
 export default Login;
