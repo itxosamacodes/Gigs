@@ -1,5 +1,6 @@
 import JobCard from "@/components/jobcard";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -13,6 +14,11 @@ import {
 } from "react-native";
 const Login = () => {
   const router = useRouter();
+  const navigation = useNavigation();
+  const onToggle = () => {
+    navigation.dispatch(DrawerActions.openDrawer);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -24,9 +30,7 @@ const Login = () => {
             name="menu"
             size={40}
             color={"black"}
-            onPress={() => {
-              router.push("/(drawer)/menu");
-            }}
+            onPress={() => onToggle()}
           />
         </View>
       </View>

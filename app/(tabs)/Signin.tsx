@@ -29,7 +29,7 @@ const Login = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity onPress={() => router.push("/(tabs)/welcom")}>
+        <TouchableOpacity onPress={() => router.push("/(drawer)/home")}>
           <Text style={styles.createAct}>Login</Text>
         </TouchableOpacity>
         <View style={styles.signRow}>
