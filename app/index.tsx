@@ -17,7 +17,7 @@ const Index = () => {
           <View style={styles.rowItem}>
             <View style={styles.avatarContainer}>
               <Image
-                source={require("../../assets/images/hmimg/frt.png")}
+                source={require("../assets/images/hmimg/frt.png")}
                 style={{ width: 50, height: 50, borderRadius: 10 }}
               />
             </View>
@@ -32,7 +32,7 @@ const Index = () => {
           <View style={styles.rowItem}>
             <View style={styles.avatarContainer}>
               <Image
-                source={require("../../assets/images/hmimg/scn.png")}
+                source={require("../assets/images/hmimg/scn.png")}
                 style={{ width: 50, height: 50, borderRadius: 10 }}
               />
             </View>
@@ -45,7 +45,7 @@ const Index = () => {
           <View style={styles.rowItem}>
             <View style={styles.avatarContainer}>
               <Image
-                source={require("../../assets/images/hmimg/trd.png")}
+                source={require("../assets/images/hmimg/trd.png")}
                 style={{ width: 50, height: 50, borderRadius: 10 }}
               />
             </View>
@@ -57,7 +57,9 @@ const Index = () => {
         </View>
 
         <View style={styles.buttonRow}>
-          <TouchableOpacity onPress={() => router.push("/(tabs)/Signup")}>
+          <TouchableOpacity
+            onPress={() => router.push("/Screens/Login/Signin")}
+          >
             <Text style={styles.candidateButton}>Start as a condidate</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push("/(tabs)/hook")}>

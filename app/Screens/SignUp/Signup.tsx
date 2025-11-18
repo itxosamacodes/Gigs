@@ -3,7 +3,6 @@ import TopBar from "@/components/topbar";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -14,8 +13,13 @@ const Login = () => {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <TopBar titl="Sign In" />
+      <TopBar titl="Sign Up" />
       <View style={styles.formColumn}>
+        <TextInput
+          placeholder="Full Name"
+          placeholderTextColor="gray"
+          style={styles.inputs}
+        />
         <TextInput
           placeholder="E-mail"
           keyboardType="email-address"
@@ -24,36 +28,33 @@ const Login = () => {
         />
         <TextInput
           placeholder="Password"
-          keyboardType="visible-password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity onPress={() => router.push("/(drawer)/home")}>
-          <Text style={styles.createAct}>Login</Text>
+        <TextInput
+          placeholder="Confirm Password"
+          secureTextEntry={true}
+          placeholderTextColor="gray"
+          style={styles.inputs}
+        />
+        <TouchableOpacity
+          onPress={() => router.push("/Screens/SignUp/verifyscreen")}
+        >
+          <Text style={styles.createAct}>create account</Text>
         </TouchableOpacity>
         <View style={styles.signRow}>
           <Text style={styles.sign}>
-            Don’t have an account?{" "}
-            <TouchableOpacity onPress={() => router.push("/(tabs)/Signup")}>
-              <Text style={styles.si}>sign up</Text>
+            Already have an account?{" "}
+            <TouchableOpacity
+              onPress={() => router.push("/Screens/SignUp/Signup")}
+            >
+              <Text style={styles.si}>sign in</Text>
             </TouchableOpacity>
           </Text>
         </View>
-        <View>
-          <TouchableOpacity>
-            <View style={styles.google}>
-              <Image
-                style={styles.gImg}
-                source={require("../../assets/images/hmimg/google.png")}
-                height={45}
-                width={45}
-              />
-              <Text style={styles.btntxt}>Sign in with google</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
       </View>
+
       <BottomImage />
     </View>
   );
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   formColumn: {
-    width: 253,
+    width: 353,
     flexDirection: "column",
     alignItems: "center",
   },
@@ -105,29 +106,6 @@ const styles = StyleSheet.create({
   },
   si: {
     color: "#DF6A6A",
-  },
-  google: {
-    flexDirection: "row",
-    marginTop: 35,
-    textAlign: "center",
-    justifyContent: "space-between",
-    width: 353,
-    backgroundColor: "#FFFF",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#FF0000",
-  },
-  btntxt: {
-    paddingRight: 35,
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: 400,
-    color: "#000000",
-    paddingVertical: 12,
-  },
-  gImg: {
-    marginLeft: 20,
-    marginTop: 4,
   },
 });
 export default Login;

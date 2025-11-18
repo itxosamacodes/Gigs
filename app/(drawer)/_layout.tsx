@@ -53,6 +53,8 @@ const _layout = () => {
           ),
         }}
       />
+      <Drawer.Screen name="(tabs)" />
+
       <Drawer.Screen
         name="Policies"
         options={{

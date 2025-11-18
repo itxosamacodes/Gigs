@@ -24,7 +24,7 @@ const Login = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity onPress={() => router.push("/(tabs)/welcom")}>
+        <TouchableOpacity onPress={() => router.push("/(drawer)/home")}>
           <Text style={styles.sendCodebtn}>Verify account</Text>
         </TouchableOpacity>
       </View>

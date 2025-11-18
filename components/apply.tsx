@@ -1,14 +1,14 @@
 import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-const JobCard = () => {
+const ApplyCard = () => {
   return (
     <View style={styles.jobCard}>
       <View style={styles.crdRow}>
         <Text style={styles.jobTit}>ReactJs Developer</Text>
         <TouchableOpacity
           onPress={() => {
-            router.push("/Screens/Jobs/TopTab");
+            router.push("/Screens/applyprocess/apply");
           }}
         >
           <Text style={styles.aplyBtn}>Apply</Text>
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default JobCard;
+export default ApplyCard;

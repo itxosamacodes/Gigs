@@ -16,7 +16,7 @@ const Login = () => {
   const router = useRouter();
   const navigation = useNavigation();
   const onToggle = () => {
-    navigation.dispatch(DrawerActions.openDrawer);
+    navigation.dispatch(DrawerActions.openDrawer());
   };
 
   return (
@@ -26,12 +26,9 @@ const Login = () => {
           <Text style={styles.pageTitel}>Welcome Osama</Text>
         </View>
         <View style={styles.manuBtn}>
-          <Ionicons
-            name="menu"
-            size={40}
-            color={"black"}
-            onPress={() => onToggle()}
-          />
+          <TouchableOpacity onPress={() => onToggle()}>
+            <Ionicons name="menu" size={40} color={"black"} />
+          </TouchableOpacity>
         </View>
       </View>
       <ScrollView>
@@ -47,7 +44,7 @@ const Login = () => {
             placeholderTextColor="gray"
             style={styles.inputs}
           />
-          <TouchableOpacity onPress={() => router.push("/(tabs)/verifyscreen")}>
+          <TouchableOpacity onPress={() => router}>
             <Text style={styles.searchBtn}>Search</Text>
           </TouchableOpacity>
         </View>
