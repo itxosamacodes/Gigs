@@ -62,7 +62,9 @@ const Index = () => {
           >
             <Text style={styles.candidateButton}>Start as a condidate</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("/(tabs)/hook")}>
+          <TouchableOpacity
+            onPress={() => router.push("/recruiterScreens/Login/Signin")}
+          >
             <Text style={styles.recruiterButton}>Start as a recruiter</Text>
           </TouchableOpacity>
         </View>
