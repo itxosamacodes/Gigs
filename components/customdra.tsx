@@ -2,6 +2,8 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+
+import { router } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,12 +48,12 @@ export default function CustomSide(props: any) {
             Usama
           </Text>
         </View>
-
+        {/* pagess icon buttos */}
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-
+      {/* Fotter */}
       <View
         style={{
           borderTopWidth: 1,
@@ -67,8 +69,7 @@ export default function CustomSide(props: any) {
             alignItems: "center",
           }}
           onPress={() => {
-            // handle logout
-            console.log("Logout tapped");
+            router.replace("/");
           }}
         >
           <Text

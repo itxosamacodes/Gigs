@@ -8,7 +8,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -32,24 +31,13 @@ const Login = () => {
         </View>
       </View>
       <ScrollView>
-        <View style={styles.formColumn}>
-          <TextInput
-            placeholder="job title, category"
-            placeholderTextColor="gray"
-            style={styles.inputs}
-          />
-          <TextInput
-            placeholder="location"
-            keyboardType="web-search"
-            placeholderTextColor="gray"
-            style={styles.inputs}
-          />
-          <TouchableOpacity onPress={() => router}>
-            <Text style={styles.searchBtn}>Search</Text>
-          </TouchableOpacity>
-        </View>
         <View style={styles.joblist}>
-          <Text style={styles.jblist}>Jobs List</Text>
+          <Text style={styles.jblist}>Offers Posted</Text>
+          <TouchableOpacity
+            onPress={() => router.push("/recruiterScreens/JobOffer/postOffer")}
+          >
+            <Text style={styles.jblist}>Post an offer</Text>
+          </TouchableOpacity>
         </View>
         <JobCard />
         <JobCard />
@@ -88,40 +76,16 @@ const styles = StyleSheet.create({
   manuBtn: {
     position: "relative",
   },
-  formColumn: {
-    position: "relative",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  inputs: {
-    marginTop: 30,
-    paddingLeft: 20,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 2,
-    borderColor: "#FF0000",
-    height: 45.4,
-    width: 378,
-    borderRadius: 7,
-  },
-  searchBtn: {
-    marginTop: 30,
-    textAlign: "center",
-    justifyContent: "center",
-    width: 378,
-    backgroundColor: "#E11F1F",
-    borderRadius: 7,
-    fontSize: 16,
-    fontWeight: "medium",
-    color: "#FFFFFF",
-    paddingVertical: 14,
-  },
   joblist: {
     position: "relative",
     marginTop: 20,
     marginLeft: 5,
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
   },
   jblist: {
-    fontSize: 23,
+    fontSize: 18,
     fontWeight: 500,
   },
 });

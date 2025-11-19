@@ -61,16 +61,6 @@ export default function Layout() {
           ),
         }}
       />
-
-      <Drawer.Screen
-        name="help"
-        options={{
-          drawerLabel: "Help Me",
-          drawerIcon: ({ size, color }) => (
-            <Ionicons name="help-circle" color={color} size={size} />
-          ),
-        }}
-      />
     </Drawer>
   );
 }
