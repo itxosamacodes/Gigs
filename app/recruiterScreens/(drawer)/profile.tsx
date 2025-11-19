@@ -1,7 +1,14 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const profile = () => {
   return (
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
   proImg: {
     height: 110,
     width: 110,
-    borderRadius: "50%",
+    borderRadius: Platform.OS == "ios" ? "50%" : 80,
     resizeMode: "cover",
   },
   ProfileName: {
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
   Analysisdes: {
     padding: 8,
     position: "absolute",
-    top: "18%",
+    top: Platform.OS == "ios" ? "18%" : 38,
     fontSize: 16,
     color: "gray",
   },
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
   BtnRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    top: "50%",
+    top: Platform.OS == "ios" ? "50%" : 80,
   },
   tite: {
     textAlign: "center",
@@ -184,14 +191,14 @@ const styles = StyleSheet.create({
   Cvdes: {
     padding: 8,
     position: "absolute",
-    top: "18%",
+    top: Platform.OS == "ios" ? "18%" : 38,
     fontSize: 16,
     color: "gray",
   },
   CvBtnRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    top: "60%",
+    top: Platform.OS == "ios" ? "60%" : 100,
   },
   upldBtn: {
     backgroundColor: "#E86767",
