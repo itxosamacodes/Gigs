@@ -2,7 +2,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import Applied from "./Aplied";
 import SaveJob from "./SaveJob";
 
@@ -15,7 +14,7 @@ export default function JobTabs() {
         <Text style={styles.pageTitle}>Welcome Osama</Text>
 
         <TouchableOpacity style={styles.menuBtn}>
-          <Ionicons name="menu" size={40} color="black" />
+          <Ionicons name="menu" size={40} color="white" />
         </TouchableOpacity>
       </View>
 
