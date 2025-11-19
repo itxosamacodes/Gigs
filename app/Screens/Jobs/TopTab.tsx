@@ -1,7 +1,9 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
+
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 import Applied from "./Aplied";
 import SaveJob from "./SaveJob";
 
