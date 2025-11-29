@@ -1,7 +1,8 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
+import { supabase } from "@/utils/supabase";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -12,25 +13,65 @@ import {
 } from "react-native";
 const Login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const LoginHandler = async () => {
+    setErrorMsg("");
+
+    if (!password || !email) {
+      setErrorMsg("Please fills the fields");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      router.push("/recruiterScreens/(drawer)/home");
+    }
+  };
   return (
     <View style={styles.container}>
       <TopBar titl="Sign In" />
       <View style={styles.formColumn}>
         <TextInput
           placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
           keyboardType="email-address"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
         <TextInput
+          value={password}
+          onChangeText={setPassword}
           placeholder="Password"
           keyboardType="visible-password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity onPress={() => router.push("/(drawer)/home")}>
-          <Text style={styles.createAct}>Login</Text>
+        {errorMsg ? (
+          <Text
+            style={{
+              color: "red",
+              paddingTop: 10,
+            }}
+          >
+            {errorMsg}
+          </Text>
+        ) : null}
+
+        <TouchableOpacity onPress={() => LoginHandler()} disabled={loading}>
+          <Text style={styles.loginBtn}>
+            {loading ? "Logining..." : "Login"}
+          </Text>
         </TouchableOpacity>
         <View style={styles.signRow}>
           <Text style={styles.sign}>
@@ -83,7 +124,7 @@ const styles = StyleSheet.create({
     width: 353,
     borderRadius: 10,
   },
-  createAct: {
+  loginBtn: {
     marginTop: 35,
     textAlign: "center",
     justifyContent: "center",

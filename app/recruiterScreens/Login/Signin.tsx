@@ -1,7 +1,7 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -10,30 +10,65 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { supabase } from "../../../utils/supabase";
 const Login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const LoginHandler = async () => {
+    setErrorMsg("");
+    if (!email || !password) {
+      setErrorMsg("Please fills the fields");
+      return;
+    }
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      router.push("/recruiterScreens/(drawer)/home");
+    }
+  };
   return (
     <View style={styles.container}>
       <TopBar titl="Sign In" />
       <View style={styles.formColumn}>
         <TextInput
           placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
           keyboardType="email-address"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
         <TextInput
           placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
           keyboardType="visible-password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity
-          onPress={() => router.push("/recruiterScreens/(drawer)/home")}
-        >
-          <Text style={styles.createAct}>Login</Text>
+
+        {errorMsg ? (
+          <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
+        ) : null}
+
+        <TouchableOpacity onPress={() => LoginHandler()} disabled={loading}>
+          <Text style={styles.createAct}>
+            {loading ? "Loging..." : "Login"}
+          </Text>
         </TouchableOpacity>
+
         <View style={styles.signRow}>
           <Text style={styles.sign}>
             Don’t have an account?{" "}

@@ -1,7 +1,8 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
+import { supabase } from "@/utils/supabase";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,43 +12,83 @@ import {
 } from "react-native";
 const Login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmpass, setConfirmPass] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [fullName, setFullName] = useState("");
+  const SignUpHandler = async () => {
+    setErrorMsg("");
+    if (password !== confirmpass) {
+      setErrorMsg("Confirm Password Doesnt Match");
+      return;
+    }
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email,
+      // password: password,
+      options: {
+        data: { fullName },
+      },
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+      return;
+    } else {
+      router.push("/Screens/SignUp/OptScreen");
+    }
+  };
   return (
     <View style={styles.container}>
       <TopBar titl="Sign Up" />
       <View style={styles.formColumn}>
         <TextInput
+          value={fullName}
+          onChangeText={setFullName}
           placeholder="Full Name"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
         <TextInput
+          value={email}
+          onChangeText={setEmail}
           placeholder="E-mail"
           keyboardType="email-address"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
         <TextInput
+          value={password}
+          onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
         <TextInput
+          value={confirmpass}
+          onChangeText={setConfirmPass}
           placeholder="Confirm Password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity
-          onPress={() => router.push("/Screens/SignUp/verifyscreen")}
-        >
-          <Text style={styles.createAct}>create account</Text>
+        {errorMsg ? (
+          <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
+        ) : null}
+        <TouchableOpacity onPress={() => SignUpHandler()} disabled={loading}>
+          <Text style={styles.createAct}>
+            {loading ? "creating account..." : "create account"}
+          </Text>
         </TouchableOpacity>
         <View style={styles.signRow}>
           <Text style={styles.sign}>
             Already have an account?{" "}
             <TouchableOpacity
-              onPress={() => router.push("/Screens/SignUp/Signup")}
+              onPress={() => router.push("/Screens/Login/Signin")}
             >
               <Text style={styles.si}>sign in</Text>
             </TouchableOpacity>

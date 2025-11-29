@@ -1,7 +1,8 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
+import { supabase } from "@/utils/supabase";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,20 +12,49 @@ import {
 } from "react-native";
 const Login = () => {
   const router = useRouter();
+  const [phone, setPhone] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const PhoneOtpHandling = async () => {
+    setErrorMsg("");
+    if (!phone) {
+      setErrorMsg("please enter the Number for OTP");
+      return;
+    }
+    setLoading(true);
+    let { error } = await supabase.auth.signInWithOtp({
+      phone: phone,
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+      return;
+    } else {
+      router.push("/recruiterScreens/SignUp/otpScreen");
+    }
+  };
   return (
     <View style={styles.container}>
       <TopBar titl="Verify" />
       <View style={styles.formColumn}>
         <TextInput
           placeholder="Enter your Phone number"
-          keyboardType="number-pad"
+          keyboardType="phone-pad"
+          value={phone}
+          onChangeText={setPhone}
           placeholderTextColor="gray"
           style={styles.inputs}
+          maxLength={13}
         />
-        <TouchableOpacity
-          onPress={() => router.push("/recruiterScreens/SignUp/recivedcode")}
-        >
-          <Text style={styles.sendCodebtn}>Send verification code</Text>
+        {errorMsg ? (
+          <Text style={{ color: "red", padding: 10 }}>{errorMsg}</Text>
+        ) : null}
+        <TouchableOpacity onPress={() => PhoneOtpHandling()} disabled={loading}>
+          <Text style={styles.sendCodebtn}>
+            {loading
+              ? "Sending verification code..."
+              : "Send verification code"}
+          </Text>
         </TouchableOpacity>
       </View>
       <View>

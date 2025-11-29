@@ -34,7 +34,7 @@ const SignUp = () => {
     setLoading(true);
 
     // 🔵 Call Supabase signup
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
@@ -47,7 +47,6 @@ const SignUp = () => {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      // 🔵 Redirect to verify screen after signup
       router.push("/recruiterScreens/SignUp/verifyscreen");
     }
   };
@@ -62,7 +61,7 @@ const SignUp = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
           value={fullName}
-          onChangeText={setFullName} // 🔵 Added
+          onChangeText={setFullName}
         />
 
         <TextInput
@@ -80,7 +79,7 @@ const SignUp = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
           value={password}
-          onChangeText={setPassword} // 🔵 Added
+          onChangeText={setPassword}
         />
 
         <TextInput
@@ -89,7 +88,7 @@ const SignUp = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
           value={confirmPassword}
-          onChangeText={setConfirmPassword} // 🔵 Added
+          onChangeText={setConfirmPassword}
         />
 
         {/* 🔵 Show any error */}
