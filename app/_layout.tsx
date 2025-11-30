@@ -8,6 +8,12 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useEffect } from "react";
+
+import * as SplashScreen from "expo-splash-screen";
+
+// Prevent auto hide before everything loads
+SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -15,6 +21,15 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    // Show splash for 2 seconds then hide
+    const timer = setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -32,6 +47,7 @@ export default function RootLayout() {
           options={{ presentation: "modal", title: "Modal" }}
         />
       </Stack>
+
       <StatusBar style="auto" />
     </ThemeProvider>
   );
