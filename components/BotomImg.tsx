@@ -1,4 +1,4 @@
-import image from "@/assets/images/hmimg/image.png";
+import image from "@/assets/botttom.jpg";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 
@@ -8,8 +8,8 @@ const BottomImage: React.FC = () => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 450,
-    height: 140,
+    width: 470,
+    height: 152,
   },
 });
 

@@ -59,8 +59,9 @@ const Login = () => {
           value={password}
           onChangeText={setPassword}
           placeholder="Password"
-          keyboardType="visible-password"
           secureTextEntry={true}
+          textContentType="password"
+          autoCapitalize="none"
           placeholderTextColor="gray"
           style={styles.inputs}
         />

@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   rowItem: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     borderRadius: 12,
     margin: 10,
     marginRight: 20,
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     width: 270,
     height: 73,
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "500",
     textAlign: "left",
     color: "#FFFFFF",
   },
