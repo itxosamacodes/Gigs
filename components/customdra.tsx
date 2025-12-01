@@ -75,7 +75,7 @@ export default function CustomSide(props: any) {
           <Text
             style={{
               fontSize: 16,
-              color: "red",
+              color: "#7A33DD",
               fontWeight: "600",
             }}
           >

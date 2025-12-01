@@ -63,13 +63,11 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "fixed",
     flex: 1,
     alignItems: "center",
     backgroundColor: "#FFFFFF",
   },
   topRow: {
-    position: "sticky",
     marginTop: 50,
     height: 50,
     flexDirection: "row",
@@ -97,8 +95,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
     paddingLeft: 20,
     backgroundColor: "#FFFFFF",
-    borderWidth: 2,
-    borderColor: "#FF0000",
+    borderWidth: 1.5,
+    borderColor: "grey",
     height: 45.4,
     width: 378,
     borderRadius: 7,
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     width: 378,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     borderRadius: 7,
     fontSize: 16,
     fontWeight: "medium",

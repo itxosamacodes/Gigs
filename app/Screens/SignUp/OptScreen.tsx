@@ -16,7 +16,7 @@ const OptScreen = () => {
   const [Otp, setOtp] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [sendMsg, setsendMsg] = useState("");
+  const [otpMsg, setotpMsg] = useState("");
   // otp varifcation button brain
   const otpVarHandler = async () => {
     setErrorMsg("");
@@ -32,30 +32,32 @@ const OptScreen = () => {
     const { error } = await supabase.auth.verifyOtp({
       email: email as string,
       //  or we can write string(email)
-      token: Otp.trim(),
+      token: Otp.trim(), //.trim extra space remove kav
       type: "email",
     });
     setLoading(false);
-    if (error) {
-      setErrorMsg(error.message);
+    if (!error) {
+      router.push("/Screens/SignUp/setPassword");
+      setErrorMsg("");
       return;
     } else {
-      router.push("/(drawer)/home");
+      setErrorMsg(error.message);
     }
   };
   // Resend Otp Button brain
   const resendOtp = async () => {
     setErrorMsg("");
-    setsendMsg("");
+    setotpMsg("");
     setLoading(true);
     const { error } = await supabase.auth.signInWithOtp({
       email: email as string,
     });
     setLoading(false);
-    if (error) {
-      setErrorMsg(error.message);
+    if (!error) {
+      setotpMsg("Your OTP has been resent to your email.");
     } else {
-      setsendMsg("Your OTP has been resent to your email.");
+      setErrorMsg(error.message);
+      setotpMsg("");
     }
   };
   return (
@@ -80,9 +82,9 @@ const OptScreen = () => {
           </Text>
         ) : null}
 
-        {sendMsg ? (
+        {otpMsg ? (
           <Text style={{ color: "green", marginTop: -15, marginBottom: 15 }}>
-            {sendMsg}
+            {otpMsg}
           </Text>
         ) : null}
         <TouchableOpacity onPress={() => otpVarHandler()} disabled={loading}>

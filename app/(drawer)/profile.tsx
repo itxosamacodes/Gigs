@@ -33,7 +33,7 @@ const profile = () => {
             <Ionicons
               name="document-text-outline"
               size={60}
-              color="#E86767"
+              color="#7A33DD"
               onPress={() => router.push("/Screens/Jobs/TopTab")}
             />
             <View
@@ -46,7 +46,7 @@ const profile = () => {
             <Ionicons
               name="bookmark"
               size={60}
-              color="#E86767"
+              color="#7A33DD"
               onPress={() => router.push("/Screens/Jobs/TopTab")}
             />
           </View>
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     top: "60%",
   },
   upldBtn: {
-    backgroundColor: "#E86767",
+    backgroundColor: "#7A33DD",
     paddingVertical: 13,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     color: "#ffff",
   },
   chkBtn: {
-    borderColor: "#E86767",
+    borderColor: "#7A33DD",
     borderWidth: 1.5,
     paddingVertical: 13,
     paddingHorizontal: 30,
