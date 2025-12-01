@@ -20,8 +20,13 @@ const Login = () => {
   const [fullName, setFullName] = useState("");
   const SignUpHandler = async () => {
     setErrorMsg("");
-    if (password !== confirmpass) {
-      setErrorMsg("Confirm Password Doesnt Match");
+    if (!email || Array.isArray(email)) {
+      setErrorMsg("Invalid email");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMsg("Please enter a valid email address.");
       return;
     }
     setLoading(true);
@@ -38,7 +43,10 @@ const Login = () => {
       setErrorMsg(error.message);
       return;
     } else {
-      router.push("/Screens/SignUp/OptScreen");
+      router.push({
+        pathname: "/Screens/SignUp/OptScreen",
+        params: { email: String(email) },
+      });
     }
   };
   return (
@@ -60,7 +68,7 @@ const Login = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TextInput
+        {/* <TextInput
           value={password}
           onChangeText={setPassword}
           placeholder="Password"
@@ -75,7 +83,7 @@ const Login = () => {
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
-        />
+        /> */}
         {errorMsg ? (
           <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
         ) : null}

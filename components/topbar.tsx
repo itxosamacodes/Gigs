@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginLeft: 100,
     fontSize: 25,
     color: "#000000",
-    fontWeight: "600",
+    fontWeight: "500",
     textAlign: "center",
     fontFamily: "Poppins",
   },

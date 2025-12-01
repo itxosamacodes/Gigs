@@ -1,6 +1,8 @@
 import BottomImage from "@/components/BotomImg";
-import { useRouter } from "expo-router";
-import React from "react";
+import { supabase } from "@/utils/supabase";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -9,7 +11,53 @@ import {
   View,
 } from "react-native";
 const OptScreen = () => {
+  const { email } = useLocalSearchParams();
   const router = useRouter();
+  const [Otp, setOtp] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sendMsg, setsendMsg] = useState("");
+  // otp varifcation button brain
+  const otpVarHandler = async () => {
+    setErrorMsg("");
+    if (!Otp) {
+      setErrorMsg("Please Enter Otp");
+      return;
+    }
+    if (Otp.length !== 6) {
+      setErrorMsg("Please enter a valid 6-character OTP.");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.verifyOtp({
+      email: email as string,
+      //  or we can write string(email)
+      token: Otp.trim(),
+      type: "email",
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+      return;
+    } else {
+      router.push("/(drawer)/home");
+    }
+  };
+  // Resend Otp Button brain
+  const resendOtp = async () => {
+    setErrorMsg("");
+    setsendMsg("");
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email as string,
+    });
+    setLoading(false);
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      setsendMsg("Your OTP has been resent to your email.");
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -20,13 +68,31 @@ const OptScreen = () => {
       <View style={styles.formColumn}>
         <TextInput
           placeholder="1 2 3 4 5 6"
+          value={Otp}
+          onChangeText={setOtp}
           keyboardType="number-pad"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        <TouchableOpacity onPress={() => router.push("/(drawer)/home")}>
+        {errorMsg ? (
+          <Text style={{ color: "red", marginTop: -15, marginBottom: 15 }}>
+            {errorMsg}
+          </Text>
+        ) : null}
+
+        {sendMsg ? (
+          <Text style={{ color: "green", marginTop: -15, marginBottom: 15 }}>
+            {sendMsg}
+          </Text>
+        ) : null}
+        <TouchableOpacity onPress={() => otpVarHandler()} disabled={loading}>
           <Text style={styles.sendCodebtn}>Verify account</Text>
         </TouchableOpacity>
+        <View style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}>
+          <TouchableOpacity onPress={() => resendOtp()} disabled={loading}>
+            <Text style={{ color: "black" }}>Resend</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View>
         <BottomImage />
@@ -50,9 +116,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   pageTitel: {
-    fontSize: 25,
+    fontSize: 23,
     color: "#000000",
-    fontWeight: "600",
+    fontWeight: "500",
     textAlign: "center",
     fontFamily: "Poppins",
   },
@@ -65,8 +131,8 @@ const styles = StyleSheet.create({
     margin: 35,
     paddingLeft: 20,
     backgroundColor: "#FFFFFF",
-    borderWidth: 1.5,
-    borderColor: "#FF0000",
+    borderWidth: 1.2,
+    borderColor: "grey",
     height: 45.4,
     width: 353,
     borderRadius: 10,
@@ -75,7 +141,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     width: 353,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     borderRadius: 10,
     fontSize: 16,
     fontWeight: "medium",
