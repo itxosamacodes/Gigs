@@ -1,16 +1,17 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
+import { supabase } from "@/utils/supabase";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import { supabase } from "../../../utils/supabase";
+
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -20,26 +21,30 @@ const Login = () => {
 
   const LoginHandler = async () => {
     setErrorMsg("");
-    if (!email || !password) {
+
+    if (!password || !email) {
       setErrorMsg("Please fills the fields");
       return;
     }
-    setLoading(true);
 
+    setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: email,
+      password: password,
     });
     setLoading(false);
+
     if (error) {
       setErrorMsg(error.message);
     } else {
       router.push("/recruiterScreens/(drawer)/home");
     }
   };
+
   return (
     <View style={styles.container}>
       <TopBar titl="Sign In" />
+      {/* input form start here */}
       <View style={styles.formColumn}>
         <TextInput
           placeholder="E-mail"
@@ -49,24 +54,43 @@ const Login = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
+
         <TextInput
-          placeholder="Password"
           value={password}
           onChangeText={setPassword}
+          placeholder="Password"
           keyboardType="visible-password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-
-        {errorMsg ? (
-          <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
-        ) : null}
-
-        <TouchableOpacity onPress={() => LoginHandler()} disabled={loading}>
-          <Text style={styles.createAct}>
-            {loading ? "Loging..." : "Login"}
+        {/* error msg  */}
+        {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
+        {/* login button */}
+        <TouchableOpacity onPress={LoginHandler} disabled={loading}>
+          <Text style={styles.loginBtn}>
+            {loading ? "Logining..." : "Login"}
           </Text>
+        </TouchableOpacity>
+        {/* forgot passwords btunss */}
+        <View style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}>
+          <TouchableOpacity>
+            <Text style={{ color: "black" }}>Forgot Password</Text>
+          </TouchableOpacity>
+        </View>
+        {/* or text */}
+        <Text style={styles.or}>or</Text>
+        {/* sign with google butn */}
+        <TouchableOpacity>
+          <View style={styles.google}>
+            <Ionicons
+              name="logo-google"
+              size={28}
+              color="#7A33DD"
+              style={styles.gIcon}
+            />
+            <Text style={styles.btntxt}>Sign in with Google</Text>
+          </View>
         </TouchableOpacity>
 
         <View style={styles.signRow}>
@@ -78,19 +102,6 @@ const Login = () => {
               <Text style={styles.si}>sign up</Text>
             </TouchableOpacity>
           </Text>
-        </View>
-        <View>
-          <TouchableOpacity>
-            <View style={styles.google}>
-              <Image
-                style={styles.gImg}
-                source={require("../../../assets/images/hmimg/google.png")}
-                height={45}
-                width={45}
-              />
-              <Text style={styles.btntxt}>Sign in with google</Text>
-            </View>
-          </TouchableOpacity>
         </View>
       </View>
       <BottomImage />
@@ -114,59 +125,68 @@ const styles = StyleSheet.create({
     marginTop: 35,
     paddingLeft: 20,
     backgroundColor: "#FFFFFF",
-    borderWidth: 1.5,
-    borderColor: "#FF0000",
+    borderWidth: 1.2,
+    borderColor: "grey",
     height: 45.4,
     width: 353,
     borderRadius: 10,
   },
-  createAct: {
+  loginBtn: {
     marginTop: 35,
     textAlign: "center",
-    justifyContent: "center",
     width: 353,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     borderRadius: 10,
     fontSize: 16,
-    fontWeight: "medium",
+    fontWeight: "500",
     color: "#FFFFFF",
     paddingVertical: 14,
   },
-  signRow: {
+  error: {
+    color: "red",
+    paddingTop: 10,
+  },
+  or: {
+    color: "grey",
+    fontSize: 18,
+    padding: 15,
+  },
+  google: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 20,
+    width: 353,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 50,
+    borderWidth: 1.2,
+    borderColor: "grey",
+    paddingVertical: 12,
+    gap: 12,
+  },
+
+  gIcon: {
+    marginLeft: -20,
+  },
+
+  btntxt: {
+    fontSize: 18,
+    fontWeight: "400",
+    color: "#000000",
+  },
+
+  signRow: {
+    marginTop: 25,
     flexDirection: "row",
     justifyContent: "center",
   },
   sign: {
-    fontSize: 16,
-    fontFamily: "Poppins",
-    fontWeight: "regular",
+    fontSize: 18,
   },
   si: {
-    color: "#DF6A6A",
-  },
-  google: {
-    flexDirection: "row",
-    marginTop: 35,
-    textAlign: "center",
-    justifyContent: "space-between",
-    width: 353,
-    backgroundColor: "#FFFF",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#FF0000",
-  },
-  btntxt: {
-    paddingRight: 35,
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: 400,
-    color: "#000000",
-    paddingVertical: 12,
-  },
-  gImg: {
-    marginLeft: 20,
-    marginTop: 4,
+    fontSize: 18,
+    color: "#7A33DD",
   },
 });
+
 export default Login;

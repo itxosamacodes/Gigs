@@ -83,6 +83,7 @@ const Login = () => {
           <Text style={styles.createAct}>
             {loading ? "creating account..." : "create account"}
           </Text>
+          <Text style={styles.or}>or</Text>
         </TouchableOpacity>
         <View style={styles.signRow}>
           <Text style={styles.sign}>
@@ -117,8 +118,8 @@ const styles = StyleSheet.create({
     marginTop: 35,
     paddingLeft: 20,
     backgroundColor: "#FFFFFF",
-    borderWidth: 1.5,
-    borderColor: "#FF0000",
+    borderWidth: 1.2,
+    borderColor: "grey",
     height: 45.4,
     width: 353,
     borderRadius: 10,
@@ -128,12 +129,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     width: 353,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     borderRadius: 10,
     fontSize: 16,
     fontWeight: "medium",
     color: "#FFFFFF",
     paddingVertical: 14,
+  },
+  or: {
+    color: "grey",
+    fontSize: 18,
+    padding: 15,
+    textAlign: "center",
   },
   signRow: {
     marginTop: 20,
@@ -141,12 +148,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sign: {
-    fontSize: 16,
-    fontFamily: "Poppins",
-    fontWeight: "regular",
+    fontSize: 18,
   },
   si: {
-    color: "#DF6A6A",
+    fontSize: 18,
+    color: "#7A33DD",
   },
 });
 export default Login;

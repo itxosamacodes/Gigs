@@ -1,5 +1,6 @@
 import BottomImage from "@/components/BotomImg";
 import TopBar from "@/components/topbar";
+import { supabase } from "@/utils/supabase";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -9,105 +10,86 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { supabase } from "../../../utils/supabase"; // supabase
-
-const SignUp = () => {
+const Login = () => {
   const router = useRouter();
-
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [confirmpass, setConfirmPass] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // 🔵 Signup function
-  const handleSignup = async () => {
-    setErrorMsg(""); // clear old error
-
-    // 🔵 Check if passwords match
-    if (password !== confirmPassword) {
-      setErrorMsg("Passwords do not match");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [fullName, setFullName] = useState("");
+  const SignUpHandler = async () => {
+    setErrorMsg("");
+    if (password !== confirmpass) {
+      setErrorMsg("Confirm Password Doesnt Match");
       return;
     }
-
     setLoading(true);
 
-    // 🔵 Call Supabase signup
-    const { error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signInWithOtp({
       email: email,
-      password: password,
+      // password: password,
       options: {
-        data: { fullName }, // store name inside user metadata
+        data: { fullName },
       },
     });
-
     setLoading(false);
-
     if (error) {
       setErrorMsg(error.message);
+      return;
     } else {
-      router.push("/recruiterScreens/SignUp/verifyscreen");
+      router.push("/Screens/SignUp/OptScreen");
     }
   };
-
   return (
     <View style={styles.container}>
       <TopBar titl="Sign Up" />
-
       <View style={styles.formColumn}>
         <TextInput
+          value={fullName}
+          onChangeText={setFullName}
           placeholder="Full Name"
           placeholderTextColor="gray"
           style={styles.inputs}
-          value={fullName}
-          onChangeText={setFullName}
         />
-
         <TextInput
-          placeholder="E-mail"
           value={email}
           onChangeText={setEmail}
+          placeholder="E-mail"
           keyboardType="email-address"
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-
         <TextInput
+          value={password}
+          onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
-          value={password}
-          onChangeText={setPassword}
         />
-
         <TextInput
+          value={confirmpass}
+          onChangeText={setConfirmPass}
           placeholder="Confirm Password"
           secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
         />
-
-        {/* 🔵 Show any error */}
         {errorMsg ? (
           <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
         ) : null}
-
-        {/* 🔵 Signup button with loader */}
-        <TouchableOpacity onPress={handleSignup} disabled={loading}>
+        <TouchableOpacity onPress={() => SignUpHandler()} disabled={loading}>
           <Text style={styles.createAct}>
-            {loading ? "Creating account..." : "Create account"}
+            {loading ? "creating account..." : "create account"}
           </Text>
+          <Text style={styles.or}>or</Text>
         </TouchableOpacity>
-
         <View style={styles.signRow}>
           <Text style={styles.sign}>
             Already have an account?{" "}
             <TouchableOpacity
-              onPress={() => router.push("/recruiterScreens/Login/Signin")}
+              onPress={() => router.push("/Screens/Login/Signin")}
             >
               <Text style={styles.si}>sign in</Text>
             </TouchableOpacity>
@@ -136,8 +118,8 @@ const styles = StyleSheet.create({
     marginTop: 35,
     paddingLeft: 20,
     backgroundColor: "#FFFFFF",
-    borderWidth: 1.5,
-    borderColor: "#FF0000",
+    borderWidth: 1.2,
+    borderColor: "grey",
     height: 45.4,
     width: 353,
     borderRadius: 10,
@@ -147,12 +129,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     width: 353,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     borderRadius: 10,
     fontSize: 16,
     fontWeight: "medium",
     color: "#FFFFFF",
     paddingVertical: 14,
+  },
+  or: {
+    color: "grey",
+    fontSize: 18,
+    padding: 15,
+    textAlign: "center",
   },
   signRow: {
     marginTop: 20,
@@ -160,13 +148,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sign: {
-    fontSize: 16,
-    fontFamily: "Poppins",
-    fontWeight: "regular",
+    fontSize: 18,
   },
   si: {
-    color: "#DF6A6A",
+    fontSize: 18,
+    color: "#7A33DD",
   },
 });
-
-export default SignUp;
+export default Login;

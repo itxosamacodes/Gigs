@@ -5,6 +5,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Index = () => {
   const router = useRouter();
+  const rowItem = [
+    {
+      img: require("../assets/images/hmimg/frt.png"),
+      text: "Search for the job in different categories, choose the one that category and place that suits you",
+    },
+    {
+      img: require("../assets/images/hmimg/scn.png"),
+      text: "Build a profesional resume, that attracts recruters for better oppertunities.",
+    },
+    {
+      img: require("../assets/images/hmimg/trd.png"),
+      text: " Stay in touch with recruters, to know from them and have more chancs.",
+    },
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -12,48 +26,18 @@ const Index = () => {
           <Text style={styles.headerText}>Gigs</Text>
           <Text style={styles.subTitle}>You can find your dream job here!</Text>
         </View>
-
         <View style={styles.column}>
-          <View style={styles.rowItem}>
-            <View style={styles.avatarContainer}>
-              <Image
-                source={require("../assets/images/hmimg/frt.png")}
-                style={{ width: 50, height: 50, borderRadius: 10 }}
-              />
+          {rowItem.map((item, index) => (
+            <View style={styles.rowItem} key={index}>
+              <View style={styles.avatarContainer}>
+                <Image
+                  source={item.img}
+                  style={{ width: 50, height: 50, borderRadius: 10 }}
+                />
+              </View>
+              <Text style={styles.rowText}>{item.text}</Text>
             </View>
-            <View>
-              <Text style={styles.rowText}>
-                Search for the job in different catgories, choose the one that
-                category and place that suits you
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.rowItem}>
-            <View style={styles.avatarContainer}>
-              <Image
-                source={require("../assets/images/hmimg/scn.png")}
-                style={{ width: 50, height: 50, borderRadius: 10 }}
-              />
-            </View>
-            <Text style={styles.rowText}>
-              Build a profesional resume, that attracts recruters for better
-              oppertunities.
-            </Text>
-          </View>
-
-          <View style={styles.rowItem}>
-            <View style={styles.avatarContainer}>
-              <Image
-                source={require("../assets/images/hmimg/trd.png")}
-                style={{ width: 50, height: 50, borderRadius: 10 }}
-              />
-            </View>
-            <Text style={styles.rowText}>
-              Stay in touch with recruters, to know from them and have more
-              chancs.
-            </Text>
-          </View>
+          ))}
         </View>
 
         <View style={styles.buttonRow}>
@@ -74,7 +58,7 @@ const Index = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#EC4545",
+    backgroundColor: "#7A33DD",
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -127,7 +111,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     width: 270,
     height: 73,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "left",
     color: "#FFFFFF",
@@ -145,7 +129,7 @@ const styles = StyleSheet.create({
     width: 196,
     textAlign: "center",
     padding: 18,
-    color: "#E13E3E",
+    color: "#7A33DD",
     backgroundColor: "#FFFFFF",
   },
   recruiterButton: {
