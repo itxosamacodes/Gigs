@@ -13,15 +13,14 @@ import {
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmpass, setConfirmPass] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [fullName, setFullName] = useState("");
   const SignUpHandler = async () => {
     setErrorMsg("");
-    if (!email || Array.isArray(email)) {
-      setErrorMsg("Invalid email");
+
+    if (!email || !fullName) {
+      setErrorMsg("Please complete all required fields.");
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -68,22 +67,7 @@ const Login = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
-        {/* <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor="gray"
-          style={styles.inputs}
-        />
-        <TextInput
-          value={confirmpass}
-          onChangeText={setConfirmPass}
-          placeholder="Confirm Password"
-          secureTextEntry={true}
-          placeholderTextColor="gray"
-          style={styles.inputs}
-        /> */}
+
         {errorMsg ? (
           <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
         ) : null}
