@@ -26,7 +26,7 @@ export default function CustomSide(props: any) {
           }}
         >
           <Image
-            source={require("../assets/u.jpeg")}
+            source={require("../../assets/candidate/u.jpeg")}
             style={{
               width: 90,
               height: 90,
