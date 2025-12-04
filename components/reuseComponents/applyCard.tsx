@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: 217,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: "#E11F1F",
+    borderColor: "grey",
   },
   crdRow: {
     position: "absolute",
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginRight: 15,
     paddingHorizontal: 27,
-    backgroundColor: "#E11F1F",
+    backgroundColor: "#7A33DD",
     color: "#FFFFFF",
     borderRadius: 10,
     fontSize: 15,

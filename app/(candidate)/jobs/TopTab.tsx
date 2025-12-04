@@ -1,6 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import React from "react";
 
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -24,10 +23,8 @@ export default function JobTabs() {
         <Tab.Navigator
           initialRouteName="Applied Job"
           screenOptions={{
-            tabBarActiveTintColor: "#FF0000",
-            tabBarInactiveTintColor: "#000",
             tabBarIndicatorStyle: {
-              backgroundColor: "#FF0000",
+              backgroundColor: "#7A33DD",
               height: 3,
               borderRadius: 20,
             },

@@ -36,7 +36,7 @@ const profile = () => {
               name="document-text-outline"
               size={60}
               color="#7A33DD"
-              onPress={() => router.push("/(candidate)/Jobs/TopTab")}
+              onPress={() => router.push("/(candidate)/jobs/TopTab")}
             />
             <View
               style={{
@@ -49,7 +49,7 @@ const profile = () => {
               name="bookmark"
               size={60}
               color="#7A33DD"
-              onPress={() => router.push("/(candidate)/Jobs/TopTab")}
+              onPress={() => router.push("/(candidate)/jobs/TopTab")}
             />
           </View>
         </View>
