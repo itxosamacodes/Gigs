@@ -1,21 +1,27 @@
 import { supabase } from "@/utils/supabase";
-import { Stack } from "expo-router";
-import { useState } from "react";
+import { Stack, router } from "expo-router";
+import { useEffect } from "react";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  const [id, setId] = useState(null);
+  useEffect(() => {
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-  const getdata = async () => {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
+      if (user) {
+        // User logged in → go to candidate dashboard
+        router.replace("/(candidate)/(drawer)/home");
+      } else {
+        // No user → go to login/index
+        router.replace("/");
+      }
+    };
 
-    if (user) {
-      console.log("User ID:", user.id);
-    }
-  };
+    checkUser();
+  }, []);
+
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />

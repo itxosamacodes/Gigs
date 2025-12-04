@@ -12,7 +12,7 @@ export default function JobTabs() {
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.topRow}>
-        <Text style={styles.pageTitle}>Welcome Osama</Text>
+        <Text style={styles.pageTitle}>Welcome Osama {}</Text>
 
         <TouchableOpacity style={styles.menuBtn}>
           <Ionicons name="menu" size={40} color="white" />

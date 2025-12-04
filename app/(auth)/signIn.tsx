@@ -37,7 +37,7 @@ const Login = () => {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      router.push("/(candidate)/(drawer)/home");
+      router.replace("/(candidate)/(drawer)/home");
     }
   };
 

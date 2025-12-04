@@ -1,3 +1,4 @@
+import { supabase } from "@/utils/supabase";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -9,7 +10,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function CustomSide(props: any) {
   const { top, bottom } = useSafeAreaInsets();
-
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.replace("/");
+  };
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <DrawerContentScrollView
@@ -68,7 +72,7 @@ export default function CustomSide(props: any) {
             alignItems: "center",
           }}
           onPress={() => {
-            router.replace("/");
+            handleLogout();
           }}
         >
           <Text
