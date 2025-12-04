@@ -1,74 +1,96 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import SideBarHeader from "../../../components/reuseComponents/sideBarHeader";
+
+const { width } = Dimensions.get("window");
 
 const profile = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.Profile}>
-        <Image
-          source={require("../../../assets/candidate/u.jpeg")}
-          style={styles.proImg}
-        />
-        <Text style={styles.ProfileName}>Mr Usama</Text>
-        <Text style={styles.UserId}>Software Engineer</Text>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.headerContainer}>
+        <SideBarHeader title="Profile" />
       </View>
-      <View style={styles.main}>
-        <View style={styles.skills}>
-          <Text style={styles.skill}>Skills</Text>
-          <Text style={styles.skillDes} numberOfLines={3} ellipsizeMode="tail">
+
+      <View style={styles.wrapper}>
+        {/* Profile Section */}
+        <View style={styles.profileSection}>
+          <Image
+            source={require("../../../assets/candidate/u.jpeg")}
+            style={styles.proImg}
+          />
+          <Text style={styles.profileName}>Mr Usama</Text>
+          <Text style={styles.userId}>Software Engineer</Text>
+        </View>
+
+        {/* Skills Card */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Skills</Text>
+          <Text style={styles.cardDescription}>
             Save your skills so you can get more opportunities if someone
             visited your profile
           </Text>
-          <Text style={styles.skillss}>React,Node,MongoDb,FireBase</Text>
+          <Text style={styles.skillsList}>React, Node, MongoDB, Firebase</Text>
         </View>
-        <View style={styles.analysisCard}>
-          <Text style={styles.Analysis}>Analysis</Text>
-          <Text
-            style={styles.Analysisdes}
-            numberOfLines={3}
-            ellipsizeMode="tail"
-          >
-            You see information about you jobs seeking journey
+
+        {/* Analysis Card */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Analysis</Text>
+          <Text style={styles.cardDescription}>
+            You see information about your job seeking journey
           </Text>
-          <View style={styles.BtnRow}>
-            <Ionicons
-              name="document-text-outline"
-              size={60}
-              color="#7A33DD"
+          <View style={styles.iconRow}>
+            <TouchableOpacity
+              style={styles.iconButton}
               onPress={() => router.push("/(candidate)/jobs/TopTab")}
-            />
-            <View
-              style={{
-                width: 2,
-                height: 50,
-                backgroundColor: "gray",
-              }}
-            />
-            <Ionicons
-              name="bookmark"
-              size={60}
-              color="#7A33DD"
+            >
+              <Ionicons
+                name="document-text-outline"
+                size={50}
+                color="#7A33DD"
+              />
+              <Text style={styles.iconLabel}>Applied</Text>
+            </TouchableOpacity>
+            <View style={styles.divider} />
+            <TouchableOpacity
+              style={styles.iconButton}
               onPress={() => router.push("/(candidate)/jobs/TopTab")}
-            />
+            >
+              <Ionicons name="bookmark" size={50} color="#7A33DD" />
+              <Text style={styles.iconLabel}>Saved</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.CvCard}>
-          <Text style={styles.Cv}>Cv</Text>
-          <Text style={styles.Cvdes} numberOfLines={3} ellipsizeMode="tail">
-            Your cv is saved to make you job application easier.
+
+        {/* CV Card */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>CV</Text>
+          <Text style={styles.cardDescription}>
+            Your CV is saved to make your job application easier.
           </Text>
-          <View style={styles.CvBtnRow}>
-            <TouchableOpacity>
-              <Text style={styles.upldBtn}>Upload CV</Text>
+          <View style={styles.buttonRow}>
+            <TouchableOpacity style={styles.uploadButton}>
+              <Text style={styles.uploadButtonText}>Upload CV</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.chkBtn}>Check CV</Text>
+            <TouchableOpacity style={styles.checkButton}>
+              <Text style={styles.checkButtonText}>Check CV</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -76,168 +98,142 @@ export default profile;
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
     flex: 1,
-    backgroundColor: "#ffff",
+    backgroundColor: "#f7f9fc",
   },
-  Profile: {
-    position: "relative",
-    top: 15,
+  contentContainer: {
+    paddingBottom: 50,
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 25,
+    backgroundColor: "#f7f9fc",
+  },
+  wrapper: {
+    paddingHorizontal: 20,
     alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
+    marginTop: 20,
+  },
+
+  // Profile Section
+  profileSection: {
+    alignItems: "center",
+    marginBottom: 30,
+    width: "100%",
   },
   proImg: {
     height: 120,
     width: 120,
-    borderRadius: "50%",
+    borderRadius: 60,
     resizeMode: "cover",
-  },
-  ProfileName: {
-    paddingTop: 10,
-    fontSize: 25,
-    fontStyle: "italic",
-    fontWeight: 400,
-  },
-  UserId: {
-    paddingTop: 8,
-    color: "gray",
-    fontSize: 22,
-    fontWeight: "semibold",
-  },
-  main: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    flex: 2,
-  },
-  skills: {
-    position: "relative",
-    alignSelf: "center",
-    width: 336,
-    height: 133,
-    borderColor: "gray",
-    borderWidth: 1.5,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 8,
-  },
-  skill: {
-    padding: 10,
-    position: "absolute",
-    top: 0,
-    fontSize: 22,
-    fontWeight: "500",
-  },
-
-  skillDes: {
-    padding: 10,
-    position: "absolute",
-    top: "20%",
-    fontSize: 16,
-    color: "gray",
-  },
-
-  skillss: {
-    padding: 10,
-    position: "absolute",
-    bottom: 0,
-    fontSize: 20,
-    fontWeight: "500",
-  },
-  analysisCard: {
-    position: "relative",
-    alignSelf: "center",
-    width: 336,
-    height: 183,
-    borderColor: "gray",
-    borderWidth: 1.5,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 8,
-  },
-  Analysis: {
-    padding: 10,
-    position: "absolute",
-    top: 0,
-    fontSize: 22,
-    fontWeight: "500",
-  },
-
-  Analysisdes: {
-    padding: 8,
-    position: "absolute",
-    top: "18%",
-    fontSize: 16,
-    color: "gray",
-  },
-  BtnRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    top: "50%",
-  },
-  CvCard: {
-    position: "relative",
-    alignSelf: "center",
-    width: 336,
-    height: 163,
-    borderColor: "gray",
-    borderWidth: 1.5,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 8,
-  },
-  Cv: {
-    padding: 10,
-    position: "absolute",
-    top: 0,
-    fontSize: 22,
-    fontWeight: "500",
-  },
-
-  Cvdes: {
-    padding: 8,
-    position: "absolute",
-    top: "18%",
-    fontSize: 16,
-    color: "gray",
-  },
-  CvBtnRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    top: "60%",
-  },
-  upldBtn: {
-    backgroundColor: "#7A33DD",
-    paddingVertical: 13,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    fontSize: 16,
-    color: "#ffff",
-  },
-  chkBtn: {
+    borderWidth: 3,
     borderColor: "#7A33DD",
-    borderWidth: 1.5,
-    paddingVertical: 13,
-    paddingHorizontal: 30,
-    borderRadius: 10,
+  },
+  profileName: {
+    marginTop: 16,
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#1F2937",
+  },
+  userId: {
+    marginTop: 6,
+    color: "#6B7280",
     fontSize: 16,
+    fontWeight: "500",
+  },
+
+  // Card Styles
+  card: {
+    width: "100%",
+    maxWidth: 500,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 3,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#1F2937",
+    marginBottom: 10,
+  },
+  cardDescription: {
+    fontSize: 15,
+    color: "#6B7280",
+    lineHeight: 22,
+    marginBottom: 16,
+  },
+  skillsList: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#7A33DD",
+    lineHeight: 24,
+  },
+
+  // Icon Row (Analysis)
+  iconRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 10,
+    paddingVertical: 10,
+  },
+  iconButton: {
+    alignItems: "center",
+    flex: 1,
+  },
+  iconLabel: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "#4B5563",
+    fontWeight: "500",
+  },
+  divider: {
+    width: 1,
+    height: 60,
+    backgroundColor: "#E5E7EB",
+  },
+
+  // Button Row (CV)
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+    gap: 12,
+  },
+  uploadButton: {
+    flex: 1,
+    backgroundColor: "#7A33DD",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    shadowColor: "#7A33DD",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
+  },
+  uploadButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  checkButton: {
+    flex: 1,
+    borderColor: "#7A33DD",
+    borderWidth: 2,
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  checkButtonText: {
+    color: "#7A33DD",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

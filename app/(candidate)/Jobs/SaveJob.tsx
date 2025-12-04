@@ -1,4 +1,4 @@
-import ApplyCard from "@/components/reuseComponents/jobsCards";
+import ApplyCard from "@/components/reuseComponents/applyCard";
 import { ScrollView, StyleSheet } from "react-native";
 
 const SaveJob = () => {

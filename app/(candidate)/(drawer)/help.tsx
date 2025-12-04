@@ -1,11 +1,14 @@
-import React from "react";
 import {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import SideBarHeader from "../../../components/reuseComponents/sideBarHeader";
+
+const { width } = Dimensions.get("window");
 
 const Help = () => {
   const faqs = [
@@ -22,30 +25,43 @@ const Help = () => {
     {
       question: "How can I contact support?",
       answer:
-        "Email us at support@gigsapp.com and we’ll respond within 24 hours.",
+        "Email us at support@gigsapp.com and we'll respond within 24 hours.",
     },
   ];
 
   return (
     <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ paddingBottom: 40 }}
+      contentContainerStyle={{
+        paddingBottom: 50,
+        paddingHorizontal: 20,
+      }}
+      showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.title}>Help & Support</Text>
-      <Text style={styles.subtitle}>
-        Find answers to common questions or contact our support team.
-      </Text>
+      <View style={styles.container}>
+        <SideBarHeader title="Help & Support" />
 
-      {faqs.map((faq, index) => (
-        <View key={index} style={styles.card}>
-          <Text style={styles.question}>{faq.question}</Text>
-          <Text style={styles.answer}>{faq.answer}</Text>
+        {/* Centered Content */}
+        <View style={styles.contentWrapper}>
+          <View style={styles.headerSection}>
+            <Text style={styles.subtitle}>
+              Find answers to common questions or contact our support team.
+            </Text>
+          </View>
+
+          <View style={styles.faqSection}>
+            {faqs.map((faq, index) => (
+              <View key={index} style={styles.card}>
+                <Text style={styles.question}>{faq.question}</Text>
+                <Text style={styles.answer}>{faq.answer}</Text>
+              </View>
+            ))}
+          </View>
+
+          <TouchableOpacity style={styles.contactButton}>
+            <Text style={styles.contactText}>Contact Support</Text>
+          </TouchableOpacity>
         </View>
-      ))}
-
-      <TouchableOpacity style={styles.contactButton}>
-        <Text style={styles.contactText}>Contact Support</Text>
-      </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -55,52 +71,76 @@ export default Help;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f9fc",
-    paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 25,
+    alignItems: "center",
   },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#1F2937",
-    marginBottom: 8,
+  contentWrapper: {
+    width: "100%",
+    maxWidth: 500,
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+
+  headerSection: {
+    width: "100%",
+    alignItems: "center",
+    marginBottom: 30,
+    marginTop: 15,
   },
   subtitle: {
     fontSize: 16,
     color: "#4B5563",
-    marginBottom: 20,
+    textAlign: "center",
+    lineHeight: 22,
+    paddingHorizontal: 10,
+  },
+
+  faqSection: {
+    width: "100%",
+    marginBottom: 10,
   },
   card: {
+    width: "100%",
     backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 15,
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 16,
     shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
     shadowOffset: { width: 0, height: 5 },
     elevation: 3,
   },
   question: {
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 17,
+    fontWeight: "700",
     color: "#111827",
-    marginBottom: 5,
+    marginBottom: 8,
+    lineHeight: 24,
   },
   answer: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#6B7280",
+    lineHeight: 22,
   },
+
   contactButton: {
-    marginTop: 20,
-    backgroundColor: "red",
-    paddingVertical: 15,
-    borderRadius: 10,
+    marginTop: 15,
+    backgroundColor: "#7A33DD",
+    paddingVertical: 16,
+    paddingHorizontal: 40,
+    borderRadius: 12,
     alignItems: "center",
+    width: "90%",
+    shadowColor: "#7A33DD",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
   },
   contactText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "600",
   },
 });

@@ -1,73 +1,110 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import SideBarHeader from "../../../components/reuseComponents/sideBarHeader";
 
 export default function TermsAndPoliciesScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Terms & Conditions</Text>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.headerContainer}>
+        <SideBarHeader title="Terms & Policies" />
+      </View>
 
-      <Text style={styles.sectionTitle}>1. Account Usage</Text>
-      <Text style={styles.updated}>Last updated: January 1, 2025</Text>
+      <View style={styles.wrapper}>
+        {/* Terms & Conditions Section */}
+        <View style={styles.section}>
+          <Text style={styles.title}>Terms & Conditions</Text>
+          <Text style={styles.updated}>Last updated: January 1, 2025</Text>
 
-      <Text style={styles.text}>
-        You are responsible for keeping your login information confidential.
-        YourApp is not responsible for unauthorized access caused by your
-        actions.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>1. Account Usage</Text>
+            <Text style={styles.text}>
+              You are responsible for keeping your login information
+              confidential. YourApp is not responsible for unauthorized access
+              caused by your actions.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>2. Acceptable Use</Text>
-      <Text style={styles.text}>
-        You agree not to misuse or disrupt the services provided by YourApp,
-        including hacking, data scraping, or unauthorized modifications.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>2. Acceptable Use</Text>
+            <Text style={styles.text}>
+              You agree not to misuse or disrupt the services provided by
+              YourApp, including hacking, data scraping, or unauthorized
+              modifications.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>3. Content Ownership</Text>
-      <Text style={styles.text}>
-        All content displayed in the app is the property of YourApp unless
-        otherwise stated.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>3. Content Ownership</Text>
+            <Text style={styles.text}>
+              All content displayed in the app is the property of YourApp unless
+              otherwise stated.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>4. Termination</Text>
-      <Text style={styles.text}>
-        We may suspend your account if you violate any terms or cause security
-        risks within the platform.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>4. Termination</Text>
+            <Text style={styles.text}>
+              We may suspend your account if you violate any terms or cause
+              security risks within the platform.
+            </Text>
+          </View>
+        </View>
 
-      <Text style={styles.title}>Privacy Policy</Text>
+        {/* Privacy Policy Section */}
+        <View style={styles.section}>
+          <Text style={styles.title}>Privacy Policy</Text>
+          <Text style={styles.updated}>Last updated: January 1, 2025</Text>
 
-      <Text style={styles.sectionTitle}>1. Information We Collect</Text>
-      <Text style={styles.updated}>Last updated: January 1, 2025</Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>1. Information We Collect</Text>
+            <Text style={styles.text}>
+              • Personal information (email address){"\n"}• Usage analytics
+              {"\n"}• Device information
+            </Text>
+          </View>
 
-      <Text style={styles.text}>
-        - Personal info (osama@gmail.com){"\n"}- Usage analytics {"\n"}- Device
-        information
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>2. How We Use Information</Text>
+            <Text style={styles.text}>
+              We use collected information to enhance app performance,
+              personalize content, and provide customer support.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>2. How We Use Information</Text>
-      <Text style={styles.text}>
-        We use collected information to enhance app performance, personalize
-        content, and provide customer support.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>3. Cookies & Tracking</Text>
+            <Text style={styles.text}>
+              We use basic analytics to understand how users interact with the
+              app.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>3. Cookies & Tracking</Text>
-      <Text style={styles.text}>
-        We use basic analytics to understand how users interact with the app.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>4. Data Sharing</Text>
+            <Text style={styles.text}>
+              We do not sell your information. Some non-sensitive data may be
+              shared with trusted providers to improve service quality.
+            </Text>
+          </View>
 
-      <Text style={styles.sectionTitle}>4. Data Sharing</Text>
-      <Text style={styles.text}>
-        We do not sell your information. Some non-sensitive data may be shared
-        with trusted providers to improve service quality.
-      </Text>
+          <View style={styles.contentBlock}>
+            <Text style={styles.sectionTitle}>5. Your Rights</Text>
+            <Text style={styles.text}>
+              You can request to update or delete your data at any time by
+              contacting us.
+            </Text>
+          </View>
+        </View>
 
-      <Text style={styles.sectionTitle}>5. Your Rights</Text>
-      <Text style={styles.text}>
-        You can request to update or delete your data at any time by contacting
-        us.
-      </Text>
-
-      <Text style={styles.sectionTitle}>Contact Us</Text>
-      <Text style={styles.text}>📧 osama@io.com</Text>
+        {/* Contact Section */}
+        <View style={styles.contactSection}>
+          <Text style={styles.sectionTitle}>Contact Us</Text>
+          <Text style={styles.contactText}>📧 osama@io.com</Text>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -75,32 +112,85 @@ export default function TermsAndPoliciesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f7f9fc",
   },
+  contentContainer: {
+    paddingBottom: 50,
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 25,
+  },
+  wrapper: {
+    paddingHorizontal: 20,
+    alignItems: "center",
+    marginTop: 15,
+  },
+
+  section: {
+    width: "100%",
+    maxWidth: 600,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    padding: 24,
+    marginTop: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
+  },
+
   title: {
-    textAlign: "center",
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold",
-    marginTop: 25,
     marginBottom: 10,
-    color: "#111",
+    color: "#1F2937",
+    textAlign: "center",
   },
   updated: {
-    fontSize: 14,
-    color: "#777",
-    marginBottom: 20,
+    fontSize: 13,
+    color: "#6B7280",
+    marginBottom: 24,
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+
+  contentBlock: {
+    marginBottom: 18,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "600",
-    color: "#333",
-    marginTop: 15,
-    marginBottom: 5,
+    color: "#111827",
+    marginBottom: 8,
+    lineHeight: 24,
   },
   text: {
     fontSize: 15,
-    color: "#555",
-    lineHeight: 22,
+    color: "#4B5563",
+    lineHeight: 24,
+  },
+
+  contactSection: {
+    width: "100%",
+    maxWidth: 600,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    padding: 24,
+    marginTop: 20,
+    marginBottom: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
+  },
+  contactText: {
+    fontSize: 16,
+    color: "#7A33DD",
+    fontWeight: "500",
+    marginTop: 5,
   },
 });
