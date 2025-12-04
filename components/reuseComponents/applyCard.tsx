@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 const ApplyCard = () => {
   return (
@@ -6,7 +7,7 @@ const ApplyCard = () => {
         <Text style={styles.jobTit}>ReactJs Developer</Text>
         <TouchableOpacity
           onPress={() => {
-            // router.push("/Screens/applyprocess/apply");
+            router.push("/(candidate)/aplyProces/apply");
           }}
         >
           <Text style={styles.aplyBtn}>Apply</Text>
