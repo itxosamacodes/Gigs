@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -41,14 +40,10 @@ const Index = () => {
         </View>
 
         <View style={styles.roleButtonsContainer}>
-          <TouchableOpacity
-          // onPress={() => router.push("/Screens/Login/Signin")}
-          >
+          <TouchableOpacity onPress={() => router.push("/(auth)/signIn")}>
             <Text style={styles.candidateBtn}>Start as a condidate</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-          // onPress={() => router.push("/recruiterScreens/Login/Signin")}
-          >
+          <TouchableOpacity onPress={() => router.push("/(auth)/signIn")}>
             <Text style={styles.recruiterBtn}>Start as a recruiter</Text>
           </TouchableOpacity>
         </View>
