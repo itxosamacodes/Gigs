@@ -37,7 +37,7 @@ const Login = () => {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      // router.push("/recruiterScreens/(drawer)/home");
+      router.push("/(candidate)/(drawer)/home");
     }
   };
 

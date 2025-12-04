@@ -1,0 +1,24 @@
+import ApplyCard from "@/components/reuseComponents/applyCard";
+import { ScrollView, StyleSheet } from "react-native";
+
+const Applied = () => {
+  return (
+    <ScrollView style={styles.container}>
+      <ApplyCard />
+      <ApplyCard />
+      <ApplyCard />
+      <ApplyCard />
+      <ApplyCard />
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 20,
+  },
+});
+
+export default Applied;

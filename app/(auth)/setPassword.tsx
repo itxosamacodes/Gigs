@@ -33,7 +33,7 @@ const PasswordScreen = () => {
       setErrorMsg(error.message);
       return;
     } else {
-      //   router.push("/(drawer)/home");
+      router.push("/(candidate)/(drawer)/home");
     }
   };
   return (
