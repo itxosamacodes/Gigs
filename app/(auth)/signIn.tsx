@@ -98,9 +98,7 @@ const Login = () => {
         <View style={styles.signRow}>
           <Text style={styles.sign}>
             Don’t have an account?{" "}
-            <TouchableOpacity
-            // onPress={() => router.push("/recruiterScreens/SignUp/Signup")}
-            >
+            <TouchableOpacity onPress={() => router.push("/(auth)/signUp")}>
               <Text style={styles.si}>sign up</Text>
             </TouchableOpacity>
           </Text>
