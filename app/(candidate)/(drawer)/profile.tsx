@@ -54,7 +54,7 @@ const profile = () => {
           <View style={styles.iconRow}>
             <TouchableOpacity
               style={styles.iconButton}
-              onPress={() => router.push("/(candidate)/jobs/TopTab")}
+              onPress={() => router.push("/(candidate)/Jobs/Aplied")}
             >
               <Ionicons
                 name="document-text-outline"
@@ -66,7 +66,7 @@ const profile = () => {
             <View style={styles.divider} />
             <TouchableOpacity
               style={styles.iconButton}
-              onPress={() => router.push("/(candidate)/jobs/TopTab")}
+              onPress={() => router.push("/(candidate)/Jobs/SaveJob")}
             >
               <Ionicons name="bookmark" size={50} color="#7A33DD" />
               <Text style={styles.iconLabel}>Saved</Text>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
     shadowColor: "#000",
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.18,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
     elevation: 3,

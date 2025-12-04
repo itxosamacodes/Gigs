@@ -7,7 +7,7 @@ const JobCard = () => {
         <Text style={styles.jobTit}>ReactJs Developer</Text>
         <TouchableOpacity
           onPress={() => {
-            router.push("/(candidate)/jobs/TopTab");
+            router.push("/(candidate)/Jobs/Aplied");
           }}
         >
           <Text style={styles.aplyBtn}>Apply</Text>
