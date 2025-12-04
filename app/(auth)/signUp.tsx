@@ -42,10 +42,10 @@ const SignUpscreen = () => {
       setErrorMsg(error.message);
       return;
     } else {
-      // router.push({
-      //   // pathname: "/Screens/SignUp/OptScreen",
-      //   // params: { email: String(email) },
-      // });
+      router.push({
+        pathname: "/(auth)/varificationScren",
+        params: { email: String(email) },
+      });
     }
   };
   return (
@@ -80,7 +80,9 @@ const SignUpscreen = () => {
         <View style={styles.signRow}>
           <Text style={styles.sign}>
             Already have an account?{" "}
-            <TouchableOpacity onPress={() => router.push("/(auth)/signIn")}>
+            <TouchableOpacity
+              onPress={() => router.push("/(auth)/varificationScren")}
+            >
               <Text style={styles.si}>sign in</Text>
             </TouchableOpacity>
           </Text>
