@@ -79,7 +79,7 @@ const Login = () => {
         </TouchableOpacity>
         {/* forgot passwords btunss */}
         <View style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push("/(auth)/forget")}>
             <Text style={{ color: "black" }}>Forgot Password</Text>
           </TouchableOpacity>
         </View>
