@@ -45,6 +45,9 @@ const Login = () => {
     <View style={styles.container}>
       <TopBar titl="Sign In" />
       {/* input form start here */}
+      <View>
+        <Text style={styles.pagetitle}>Hey, Welcome Back 👋</Text>
+      </View>
       <View style={styles.formColumn}>
         <TextInput
           placeholder="E-mail"
@@ -116,6 +119,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FFFFFF",
   },
+  pagetitle: {
+    fontSize: 22,
+    fontWeight: "500",
+    color: "#7A33DD", // your app color
+  },
+
   formColumn: {
     width: 253,
     flexDirection: "column",
