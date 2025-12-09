@@ -20,9 +20,11 @@ const PasswordScreen = () => {
     setErrorMsg("");
     if (!password || !confirmpass) {
       setErrorMsg("Please Enter Password");
+      return
     }
     if (password !== confirmpass) {
       setErrorMsg("Password Doesnt Match");
+      return
     }
     setLoading(true);
     const { error } = await supabase.auth.updateUser({

@@ -38,7 +38,7 @@ const OptScreen = () => {
     });
     setLoading(false);
     if (!error) {
-      router.push("/(auth)/setPassword");
+      router.push("/(candidate)/(drawer)/home");
       setErrorMsg("");
       return;
     } else {

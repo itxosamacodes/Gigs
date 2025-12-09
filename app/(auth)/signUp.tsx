@@ -12,27 +12,33 @@ import {
 } from "react-native";
 const SignUpscreen = () => {
   const router = useRouter();
+  const [password, setPassword] = useState("");
+  const [confirmpass, setConfirmPass] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [fullName, setFullName] = useState("");
   const SignUpHandler = async () => {
     setErrorMsg("");
+    const normalmail = email.trim().toLowerCase()
 
-    if (!email || !fullName) {
-      setErrorMsg("Please complete all required fields.");
-      return;
+    if (!password || !confirmpass || !normalmail || !fullName) {
+      setErrorMsg("Please fills all the fields");
+      return
+    }
+    if (password !== confirmpass) {
+      setErrorMsg("Password Doesnt Match");
+      return
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(normalmail)) {
       setErrorMsg("Please enter a valid email address.");
       return;
     }
     setLoading(true);
-
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email,
-      // password: password,
+    const { error } = await supabase.auth.signUp({
+      password: password,
+      email: normalmail,
       options: {
         data: { fullName },
       },
@@ -44,7 +50,7 @@ const SignUpscreen = () => {
     } else {
       router.push({
         pathname: "/(auth)/varificationScren",
-        params: { email: String(email) },
+        params: { email: normalmail },
       });
     }
   };
@@ -64,6 +70,22 @@ const SignUpscreen = () => {
           onChangeText={setEmail}
           placeholder="E-mail"
           keyboardType="email-address"
+          placeholderTextColor="gray"
+          style={styles.inputs}
+        />
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry={true}
+          placeholderTextColor="gray"
+          style={styles.inputs}
+        />
+        <TextInput
+          value={confirmpass}
+          onChangeText={setConfirmPass}
+          placeholder="Confirm Password"
+          secureTextEntry={true}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
