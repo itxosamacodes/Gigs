@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TextInput,
@@ -88,7 +89,7 @@ const OptScreen = () => {
           </Text>
         ) : null}
         <TouchableOpacity onPress={() => otpVarHandler()} disabled={loading}>
-          <Text style={styles.sendCodebtn}>Verify account</Text>
+          <Text style={styles.sendCodebtn}>{loading ? <ActivityIndicator size="small" color="white" /> : "Varify Account"}</Text>
         </TouchableOpacity>
         <View style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}>
           <TouchableOpacity onPress={() => resendOtp()} disabled={loading}>

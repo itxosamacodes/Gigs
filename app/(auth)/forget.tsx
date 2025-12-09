@@ -10,38 +10,51 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 const OptScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  // otp varifcation button brain
   const forgethandler = async () => {
     setErrorMsg("");
     if (!email) {
-      setErrorMsg("Please Enter Email");
+      setErrorMsg("Please enter email adress");
       return;
     }
-
     setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    const { data: userData, error: UserEror } = await supabase
+      .from("clint")
+      .select("email")
+      .eq(email, "email")
+      .single();
+    setLoading(false)
+    if (!userData || UserEror) {
+      setErrorMsg("User not found")
+      return;
+    }
+    setLoading(true)
+    const { error } = await supabase.auth.resetPasswordForEmail(
+      email.trim().toLowerCase()
+    );
     setLoading(false);
-    if (!error) {
-      router.push({
-        pathname: "/(auth)/varificationScren",
-        params: { email: String(email) },
-      });
-      alert("OTP has been sent to your email");
+    if (error) {
+      setErrorMsg(error.message);
       return;
     } else {
-      setErrorMsg(error.message);
+      router.push({
+        pathname: "/(auth)/varificationScren",
+        params: { email: email },
+      });
+      setErrorMsg("Password reset email sent!");
+      return;
     }
   };
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
         <View>
-          <Text style={styles.pageTitel}>Verify Your Email</Text>
+          <Text style={styles.pageTitel}>Reset Your Password</Text>
         </View>
       </View>
       <View style={styles.formColumn}>
@@ -49,7 +62,9 @@ const OptScreen = () => {
           placeholder="Enter Your Email"
           value={email}
           onChangeText={setEmail}
-          keyboardType="number-pad"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
           placeholderTextColor="gray"
           style={styles.inputs}
         />
@@ -60,7 +75,9 @@ const OptScreen = () => {
         ) : null}
 
         <TouchableOpacity onPress={() => forgethandler()} disabled={loading}>
-          <Text style={styles.sendCodebtn}>Send OTP</Text>
+          <Text style={styles.sendCodebtn}>
+            {loading ? "Sending..." : "Send Reset Link"}
+          </Text>
         </TouchableOpacity>
         <View
           style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}
@@ -121,4 +138,5 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
 });
+
 export default OptScreen;
