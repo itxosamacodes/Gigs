@@ -82,6 +82,9 @@ const SignUpscreen = () => {
   return (
     <View style={styles.container}>
       <TopBar titl="Sign Up" />
+      <View>
+        <Text style={styles.pagetitle}>We’re Excited to Have You ✨</Text>
+      </View>
       <View style={styles.formColumn}>
         <TextInput
           value={fullName}
@@ -147,6 +150,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
+  },
+  pagetitle: {
+    fontSize: 22,
+    fontWeight: "500",
+    color: "#7A33DD", // your app color
   },
   formColumn: {
     width: 353,

@@ -42,26 +42,26 @@ const OptScreen = () => {
     setLoading(false);
 
     if (error) {
-      setErrorMsg("Account not Found with this email.");
+      setErrorMsg("No account found with this email.");
       return;
     }
 
 
     router.push({
       pathname: "/(auth)/varificationScren",
-      params: { email: email.trim().toLowerCase(), },
+      params: { email: email.trim().toLowerCase(), mode: "reset" },
     });
   };
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
         <View>
-          <Text style={styles.pageTitel}>Reset Your Password</Text>
+          <Text style={styles.pageTitel}>Reset Your Password 🔒</Text>
         </View>
       </View>
       <View style={styles.formColumn}>
         <TextInput
-          placeholder="Enter Your Email"
+          placeholder="Enter your email address"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -78,7 +78,7 @@ const OptScreen = () => {
 
         <TouchableOpacity onPress={() => forgethandler()} disabled={loading}>
           <Text style={styles.sendCodebtn}>
-            {loading ? <ActivityIndicator size={"small"} color={"white"} /> : "Send OTP"}
+            {loading ? <ActivityIndicator size={"small"} color={"white"} /> : "Send Verification Code"}
           </Text>
         </TouchableOpacity>
         <View

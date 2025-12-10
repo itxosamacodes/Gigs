@@ -22,11 +22,11 @@ const OptScreen = () => {
   const otpVarHandler = async () => {
     setErrorMsg("");
     if (!Otp) {
-      setErrorMsg("Please Enter Otp");
+      setErrorMsg("Please enter the OTP.");
       return;
     }
     if (Otp.length !== 6) {
-      setErrorMsg("Please enter a valid 6-character OTP.");
+      setErrorMsg("Please enter a valid 6-digit OTP.");
       return;
     }
     setLoading(true);
@@ -60,7 +60,7 @@ const OptScreen = () => {
     });
     setLoading(false);
     if (!error) {
-      setotpMsg("Your OTP has been resent to your email.");
+      setotpMsg("A new OTP has been sent to your email.");
     } else {
       setErrorMsg(error.message);
       setotpMsg("");
@@ -70,12 +70,13 @@ const OptScreen = () => {
     <View style={styles.container}>
       <View style={styles.topRow}>
         <View>
-          <Text style={styles.pageTitel}>Enter the received code</Text>
+          <Text style={styles.pageTitel}>Enter the Verification Code
+          </Text>
         </View>
       </View>
       <View style={styles.formColumn}>
         <TextInput
-          placeholder="1 2 3 4 5 6"
+          placeholder="Enter 6-digit code"
           value={Otp}
           onChangeText={setOtp}
           keyboardType="number-pad"
@@ -94,11 +95,11 @@ const OptScreen = () => {
           </Text>
         ) : null}
         <TouchableOpacity onPress={() => otpVarHandler()} disabled={loading}>
-          <Text style={styles.sendCodebtn}>{loading ? <ActivityIndicator size="small" color="white" /> : "Varify Account"}</Text>
+          <Text style={styles.sendCodebtn}>{loading ? <ActivityIndicator size="small" color="white" /> : "Verify Account"}</Text>
         </TouchableOpacity>
         <View style={{ width: 353, alignItems: "flex-end", marginTop: 8 }}>
           <TouchableOpacity onPress={() => resendOtp()} disabled={loading}>
-            <Text style={{ color: "black" }}>Resend</Text>
+            <Text style={{ color: "black" }}>Resend Code</Text>
           </TouchableOpacity>
         </View>
       </View>

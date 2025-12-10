@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TextInput,
@@ -19,11 +20,11 @@ const PasswordScreen = () => {
   const setupPassword = async () => {
     setErrorMsg("");
     if (!password || !confirmpass) {
-      setErrorMsg("Please Enter Password");
+      setErrorMsg("Please enter your password.");
       return
     }
     if (password !== confirmpass) {
-      setErrorMsg("Password Doesnt Match");
+      setErrorMsg("Passwords do not match.");
       return
     }
     setLoading(true);
@@ -41,7 +42,8 @@ const PasswordScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
-        <Text style={styles.pageTitel}>Set Your Password</Text>
+        <Text style={styles.pageTitel}>Create a New Password
+        </Text>
       </View>
       <View style={styles.formColumn}>
         <TextInput
@@ -67,7 +69,7 @@ const PasswordScreen = () => {
           }}
           disabled={loading}
         >
-          <Text style={styles.sendCodebtn}>Set Password</Text>
+          <Text style={styles.sendCodebtn}>{loading ? <ActivityIndicator size={"small"} color={"white"} /> : "Save New Password"}</Text>
         </TouchableOpacity>
       </View>
       <View>
