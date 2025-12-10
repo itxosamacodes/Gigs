@@ -1,16 +1,15 @@
 import {
   Image,
   Platform,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 
 export default function ApplicationDone() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Application</Text>
       <View style={styles.formColumn}>
         <Image
@@ -25,7 +24,7 @@ export default function ApplicationDone() {
           <Text style={styles.nextText}>Validate</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
