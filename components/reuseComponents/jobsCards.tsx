@@ -10,7 +10,7 @@ const JobCard = () => {
             router.push("/(candidate)/Jobs/Aplied");
           }}
         >
-          <Text style={styles.aplyBtn}>Apply</Text>
+          <Text style={styles.aplyBtn}>Save</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.tit}>

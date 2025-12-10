@@ -7,6 +7,7 @@ export default function RootLayout() {
       <Stack.Screen name="aplyProces" options={{ headerShown: false }} />
       <Stack.Screen name="apply" options={{ headerShown: false }} />
       <Stack.Screen name="cvPicker" options={{ headerShown: false }} />
+      <Stack.Screen name="apkDone" options={{ headerShown: false }} />
     </Stack>
   );
 }

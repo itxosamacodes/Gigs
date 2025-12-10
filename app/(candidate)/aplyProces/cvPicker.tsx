@@ -1,4 +1,5 @@
 import * as DocumentPicker from "expo-document-picker";
+import { router } from "expo-router";
 import {
   Image,
   Platform,
@@ -44,7 +45,7 @@ export default function ApplicationProces() {
         <TouchableOpacity
           style={styles.nextBtn}
           onPress={() => {
-            // router.push("/Screens/applyprocess/processdone");
+            router.push("/(candidate)/aplyProces/apkDone")
           }}
         >
           <Text style={styles.nextText}>Next</Text>
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     width: 140,
     height: 40,
     borderWidth: 1.5,
-    borderColor: "#ff4d5a",
+    borderColor: "#7A33DD",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
   nextBtn: {
     width: 140,
     height: 40,
-    backgroundColor: "#ff4d5a",
+    backgroundColor: "#7A33DD",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",

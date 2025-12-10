@@ -69,7 +69,7 @@ export default function ApplicationForm() {
         {/* Next */}
         <TouchableOpacity
           style={styles.nextBtn}
-          onPress={() => router.push("/(candidate)/aplyProces/apply")}
+          onPress={() => router.push("/(candidate)/aplyProces/cvPicker")}
         >
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
