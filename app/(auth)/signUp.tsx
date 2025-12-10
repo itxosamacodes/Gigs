@@ -4,6 +4,7 @@ import { supabase } from "@/utils/supabase";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TextInput,
@@ -20,40 +21,64 @@ const SignUpscreen = () => {
   const [fullName, setFullName] = useState("");
   const SignUpHandler = async () => {
     setErrorMsg("");
-    const normalmail = email.trim().toLowerCase()
+    const normalmail = email.trim().toLowerCase();
 
-    if (!password || !confirmpass || !normalmail || !fullName) {
-      setErrorMsg("Please fills all the fields");
-      return
+
+    if (!fullName || !normalmail || !password || !confirmpass) {
+      setErrorMsg("Please fill all the fields");
+      return;
     }
     if (password !== confirmpass) {
-      setErrorMsg("Password Doesnt Match");
-      return
+      setErrorMsg("Passwords do not match");
+      return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(normalmail)) {
-      setErrorMsg("Please enter a valid email address.");
+      setErrorMsg("Please enter a valid email address");
       return;
     }
+
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      password: password,
+
+    const { data, error } = await supabase.auth.signUp({
       email: normalmail,
+      password: password,
       options: {
         data: { fullName },
       },
     });
+
     setLoading(false);
+
+
     if (error) {
       setErrorMsg(error.message);
       return;
-    } else {
-      router.push({
-        pathname: "/(auth)/varificationScren",
-        params: { email: normalmail },
-      });
     }
+
+
+    if (!data.user) {
+      setErrorMsg("Signup failed. Please try again.");
+      return;
+    }
+
+    if (data.user.identities?.length === 0) {
+      setErrorMsg("This email is already registered. Please sign in.");
+      return;
+    }
+
+
+    if (data.user.email_confirmed_at) {
+      setErrorMsg("Account already exists and is verified. Please sign in.");
+      return;
+    }
+
+    router.push({
+      pathname: "/(auth)/varificationScren",
+      params: { email: normalmail, mode: "signup" },
+    });
   };
+
   return (
     <View style={styles.container}>
       <TopBar titl="Sign Up" />
@@ -95,7 +120,7 @@ const SignUpscreen = () => {
         ) : null}
         <TouchableOpacity onPress={() => SignUpHandler()} disabled={loading}>
           <Text style={styles.createAct}>
-            {loading ? "creating account..." : "create account"}
+            {loading ? <ActivityIndicator size={"small"} color={"white"} /> : "create account"}
           </Text>
           <Text style={styles.or}>or</Text>
         </TouchableOpacity>
@@ -103,7 +128,7 @@ const SignUpscreen = () => {
           <Text style={styles.sign}>
             Already have an account?{" "}
             <TouchableOpacity
-              onPress={() => router.push("/(auth)/varificationScren")}
+              onPress={() => router.push("/(auth)/signIn")}
             >
               <Text style={styles.si}>sign in</Text>
             </TouchableOpacity>

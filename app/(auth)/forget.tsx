@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TextInput,
@@ -16,39 +17,40 @@ const OptScreen = () => {
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
   const forgethandler = async () => {
     setErrorMsg("");
-    if (!email) {
-      setErrorMsg("Please enter email adress");
+
+
+    if (!email.trim()) {
+      setErrorMsg("Please enter your email address");
       return;
     }
+
     setLoading(true);
-    const { data: userData, error: UserEror } = await supabase
-      .from("clint")
-      .select("email")
-      .eq(email, "email")
-      .single();
-    setLoading(false)
-    if (!userData || UserEror) {
-      setErrorMsg("User not found")
-      return;
-    }
-    setLoading(true)
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      email.trim().toLowerCase()
+
+    const { error } = await supabase.auth.signInWithOtp(
+      {
+        email: email.trim().toLowerCase(),
+        options: {
+          shouldCreateUser: (false)
+        }
+      }
+
     );
+
     setLoading(false);
+
     if (error) {
-      setErrorMsg(error.message);
-      return;
-    } else {
-      router.push({
-        pathname: "/(auth)/varificationScren",
-        params: { email: email },
-      });
-      setErrorMsg("Password reset email sent!");
+      setErrorMsg("Account not Found with this email.");
       return;
     }
+
+
+    router.push({
+      pathname: "/(auth)/varificationScren",
+      params: { email: email.trim().toLowerCase(), },
+    });
   };
   return (
     <View style={styles.container}>
@@ -76,7 +78,7 @@ const OptScreen = () => {
 
         <TouchableOpacity onPress={() => forgethandler()} disabled={loading}>
           <Text style={styles.sendCodebtn}>
-            {loading ? "Sending..." : "Send Reset Link"}
+            {loading ? <ActivityIndicator size={"small"} color={"white"} /> : "Send OTP"}
           </Text>
         </TouchableOpacity>
         <View

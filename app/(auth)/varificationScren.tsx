@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 const OptScreen = () => {
-  const { email } = useLocalSearchParams();
+  const { email, mode } = useLocalSearchParams();
   const router = useRouter();
   const [Otp, setOtp] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -32,18 +32,23 @@ const OptScreen = () => {
     setLoading(true);
     const { error } = await supabase.auth.verifyOtp({
       email: email as string,
-      //  or we can write string(email)
-      token: Otp.trim(), //.trim extra space remove kav
+      token: Otp.trim(),
       type: "email",
     });
     setLoading(false);
-    if (!error) {
+    if (error) {
+      setErrorMsg(error.message);
+      return;
+    }
+    if (mode === "signup") {
       router.push("/(candidate)/(drawer)/home");
       setErrorMsg("");
-      return;
-    } else {
-      setErrorMsg(error.message);
     }
+    else {
+      router.push("/(auth)/setPassword");
+      setErrorMsg("");
+    }
+
   };
   // Resend Otp Button brain
   const resendOtp = async () => {
