@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: "row",
     justifyContent: "center",
+
   },
   sign: {
     fontSize: 18,
