@@ -3,7 +3,6 @@ import TopBar from "@/components/reuseComponents/topBar";
 import { supabase } from "@/utils/supabase";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import * as WebBrowser from 'expo-web-browser';
 import { useState } from "react";
 
 import {
@@ -11,8 +10,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
+import { signInWithGoogle } from "../services/useGoogle";
 
 const Login = () => {
   const router = useRouter();
@@ -42,21 +42,16 @@ const Login = () => {
       router.replace("/(candidate)/(drawer)/home");
     }
   };
-  WebBrowser.maybeCompleteAuthSession();
 
-  const handleGoogleSignIn = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-
-
-    });
-
-    if (error) {
-      console.error("Error signing in: ", error.message);
-    } else {
-      WebBrowser.openBrowserAsync(data.url);
+  const handleGoogle = async () => {
+    try {
+      await signInWithGoogle();
+      router.replace("/(candidate)/(drawer)/home");
+    } catch (e: any) {
+      console.error(e.message);
     }
   };
+
 
   return (
     <View style={styles.container}>
@@ -103,7 +98,7 @@ const Login = () => {
         {/* or text */}
         <Text style={styles.or}>or</Text>
         {/* sign with google butn */}
-        <TouchableOpacity onPress={() => handleGoogleSignIn()}>
+        <TouchableOpacity onPress={() => handleGoogle()}>
           <View style={styles.google}>
             <Ionicons
               name="logo-google"
