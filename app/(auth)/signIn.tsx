@@ -39,7 +39,21 @@ const Login = () => {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      router.replace("/(recruiter)/(drawer)/home");
+      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      if (userError) {
+        console.log(userError.message)
+      }
+      const userRole = user?.user_metadata?.role;
+
+      if (userRole === "candidate") {
+        router.push("/(candidate)/(drawer)/home");
+
+      }
+      else {
+        router.push("/(recruiter)/(drawer)/home");
+      }
+      setErrorMsg("");
+
     }
   };
 
@@ -128,7 +142,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f3f4f6d0",
   },
   pagetitle: {
     fontSize: 22,
@@ -144,12 +158,21 @@ const styles = StyleSheet.create({
   inputs: {
     marginTop: 35,
     paddingLeft: 20,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1.2,
+    backgroundColor: "#fff",
+    // borderWidth: 1.2,
     borderColor: "grey",
-    height: 45.4,
+    color: '#111827',
+    height: 48.4,
     width: 353,
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 2, height: 3 },
+    shadowRadius: 8,
+
+    // Android shadow
+    elevation: 10,
+
   },
   loginBtn: {
     marginTop: 35,
@@ -179,10 +202,9 @@ const styles = StyleSheet.create({
     width: 353,
     backgroundColor: "#FFFFFF",
     borderRadius: 50,
-    borderWidth: 1.2,
-    borderColor: "grey",
     paddingVertical: 12,
     gap: 12,
+
   },
 
   gIcon: {

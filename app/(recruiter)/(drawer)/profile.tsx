@@ -1,17 +1,15 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import {
-  Dimensions,
   Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import SideBarHeader from "../../../components/reuseComponents/sideBarHeader";
 
-const { width } = Dimensions.get("window");
 
 const RecruiterProfile = () => {
   return (

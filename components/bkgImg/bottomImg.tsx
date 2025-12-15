@@ -1,4 +1,4 @@
-import image from "@/assets/auth/botttom.jpg";
+import image from "@/assets/auth/bottom.png";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 

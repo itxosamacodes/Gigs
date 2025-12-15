@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Dropdown } from 'react-native-element-dropdown';
 const SignUpscreen = () => {
   const router = useRouter();
   const [password, setPassword] = useState("");
@@ -19,12 +20,18 @@ const SignUpscreen = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [fullName, setFullName] = useState("");
+  const [role, setRole] = useState("");
+  const data = [
+    { label: 'Candidate', value: 'candidate' },
+    { label: 'Recruiter', value: 'recruiter' },
+  ];
+
   const SignUpHandler = async () => {
     setErrorMsg("");
     const normalmail = email.trim().toLowerCase();
 
 
-    if (!fullName || !normalmail || !password || !confirmpass) {
+    if (!fullName || !normalmail || !password || !confirmpass || !role) {
       setErrorMsg("Please fill all the fields");
       return;
     }
@@ -44,7 +51,7 @@ const SignUpscreen = () => {
       email: normalmail,
       password: password,
       options: {
-        data: { fullName },
+        data: { fullName, role },
       },
     });
 
@@ -117,9 +124,21 @@ const SignUpscreen = () => {
           placeholderTextColor="gray"
           style={styles.inputs}
         />
+        <View style={styles.dropdownContainer}>
+          <Dropdown
+            style={styles.dropdown}
+            data={data}
+            labelField="label"
+            valueField="value"
+            placeholder="Set your role"
+            placeholderStyle={{ color: 'gray' }}
+            value={role}
+            onChange={item => setRole(item.value)}
+          />
+        </View>
 
         {errorMsg ? (
-          <Text style={{ color: "red", marginTop: 10 }}>{errorMsg}</Text>
+          <Text style={{ color: "red", marginTop: 75, marginBottom: -35 }}>{errorMsg}</Text>
         ) : null}
         <TouchableOpacity onPress={() => SignUpHandler()} disabled={loading}>
           <Text style={styles.createAct}>
@@ -154,7 +173,7 @@ const styles = StyleSheet.create({
   pagetitle: {
     fontSize: 22,
     fontWeight: "500",
-    color: "#7A33DD", // your app color
+    color: "#7A33DD",
   },
   formColumn: {
     width: 353,
@@ -171,8 +190,26 @@ const styles = StyleSheet.create({
     width: 353,
     borderRadius: 10,
   },
-  createAct: {
+  // Dropdown start heere
+  dropdownContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 35,
+  },
+  dropdown: {
+    marginTop: 35,
+    paddingLeft: 20,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1.2,
+    borderColor: 'grey',
+    height: 45.4,
+    width: 353,
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  createAct: {
+    marginTop: 70,
     textAlign: "center",
     justifyContent: "center",
     width: 353,

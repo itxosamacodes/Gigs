@@ -40,14 +40,27 @@ const OptScreen = () => {
       setErrorMsg(error.message);
       return;
     }
-    if (mode === "signup") {
-      router.push("/(candidate)/(drawer)/home");
-      setErrorMsg("");
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError) {
+      console.log(userError.message);
+      setErrorMsg(userError.message);
+    } else {
+      const userRole = user?.user_metadata?.role;
+
+      if (mode === "signup") {
+        if (userRole === "candidate") {
+          router.push("/(candidate)/(drawer)/home");
+        } else {
+          router.push("/(recruiter)/(drawer)/home");
+        }
+        setErrorMsg("");
+      } else {
+        router.push("/(auth)/setPassword");
+        setErrorMsg("");
+      }
     }
-    else {
-      router.push("/(auth)/setPassword");
-      setErrorMsg("");
-    }
+
 
   };
   // Resend Otp Button brain
