@@ -12,7 +12,7 @@ export default function Layout() {
 
         drawerStyle: { width: 282, backgroundColor: "#fff" },
 
-        drawerActiveBackgroundColor: "#a50e0ef0",
+        drawerActiveBackgroundColor: "#7A33DD",
         drawerInactiveBackgroundColor: "#F2F2F2",
 
         drawerItemStyle: {

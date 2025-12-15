@@ -1,209 +1,201 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { router } from "expo-router";
 import {
+  Dimensions,
   Image,
-  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import SideBarHeader from "../../../components/reuseComponents/sideBarHeader";
 
-const profile = () => {
+const { width } = Dimensions.get("window");
+
+const RecruiterProfile = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.Profile}>
-        <Image
-          source={require("../../../assets/candidate/u.jpeg")}
-          style={styles.proImg}
-        />
-        <Text style={styles.ProfileName}>Mr Usama</Text>
-        <Text style={styles.UserId}>Hr</Text>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.headerContainer}>
+        <SideBarHeader title="Profile" />
       </View>
-      <View style={styles.main}>
-        <View style={styles.analysisCard}>
-          <Text style={styles.Analysis}>Analysis</Text>
-          <Text
-            style={styles.Analysisdes}
-            numberOfLines={3}
-            ellipsizeMode="tail"
-          >
-            You see information about you jobs seeking journey
+
+      <View style={styles.wrapper}>
+        {/* Profile Section */}
+        <View style={styles.profileSection}>
+          <Image
+            source={require("../../../assets/candidate/u.jpeg")}
+            style={styles.proImg}
+          />
+          <Text style={styles.profileName}>Mr Usama</Text>
+          <Text style={styles.userId}>HR Manager</Text>
+        </View>
+
+        {/* Analysis Card */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Analysis</Text>
+          <Text style={styles.cardDescription}>
+            You see information about your job seeking journey
           </Text>
-          <View style={styles.BtnRow}>
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Ionicons
-                name="document-text"
-                size={60}
-                color="#E86767"
-              // onPress={() => router.push("/Screens/Jobs/TopTab")}
-              />
-              <Text style={styles.tite}>10 job </Text>
-              <Text style={styles.tite}>offers</Text>
+          <View style={styles.iconRow}>
+            <View style={styles.iconButton}>
+              <TouchableOpacity onPress={() => router.push('/(recruiter)/(drawer)/home')}>
+
+                <Ionicons name="document-text-outline" size={60} color="#7A33DD" />
+                <Text style={styles.iconLabel}>10 Job</Text>
+                <Text style={styles.iconLabel}>Offers</Text>
+              </TouchableOpacity>
+
             </View>
 
-            <View
-              style={{
-                width: 2,
-                height: 50,
-                backgroundColor: "gray",
-              }}
-            />
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Ionicons
-                name="arrow-down-outline"
-                size={60}
-                color="#E86767"
-              // onPress={() => router.push("/Screens/Jobs/TopTab")}
-              />
-              <Text style={styles.tite}>recieved</Text>
-              <Text style={styles.tite}>application</Text>
+            <View style={styles.divider} />
+
+            <View style={styles.iconButton}>
+              <Ionicons name="arrow-down-outline" size={60} color="#7A33DD" />
+              <Text style={styles.iconLabel}>Received</Text>
+              <Text style={styles.iconLabel}>Applications</Text>
             </View>
           </View>
         </View>
-        <View style={styles.CvCard}>
-          <Text style={styles.Cv}>Cv</Text>
-          <Text style={styles.Cvdes} numberOfLines={3} ellipsizeMode="tail">
-            Your cv is saved to make you job application easier.
+
+        {/* CV / Action Card */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Post a Job</Text>
+          <Text style={styles.cardDescription}>
+            Create new job postings to attract the best candidates.
           </Text>
-          <View style={styles.CvBtnRow}>
-            <TouchableOpacity
-            // onPress={() =>
-            //   router.push("/recruiterScreens/JobOffer/postOffer")
-            // }
-            >
-              <Text style={styles.upldBtn}>Create new post</Text>
+          <View style={styles.buttonRow}>
+            <TouchableOpacity onPress={() => router.push('/JobOffer/postOffer')} style={styles.postButton}>
+              <Text style={styles.postButtonText}>Create New Post</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
-export default profile;
+export default RecruiterProfile;
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
     flex: 1,
-    backgroundColor: "#ffff",
+    backgroundColor: "#f7f9fc",
   },
-  Profile: {
-    position: "relative",
-    top: 15,
+  contentContainer: {
+    paddingBottom: 50,
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 25,
+    backgroundColor: "#f7f9fc",
+  },
+  wrapper: {
+    paddingHorizontal: 20,
     alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
+    marginTop: 20,
+  },
+
+  // Profile Section
+  profileSection: {
+    alignItems: "center",
+    marginBottom: 30,
+    width: "100%",
   },
   proImg: {
-    height: 110,
-    width: 110,
-    borderRadius: Platform.OS == "ios" ? "50%" : 80,
+    height: 120,
+    width: 120,
+    borderRadius: 60,
     resizeMode: "cover",
+    borderWidth: 3,
+    borderColor: "#7A33DD",
   },
-  ProfileName: {
-    paddingTop: 10,
-    fontSize: 25,
-    fontStyle: "italic",
-    fontWeight: 400,
+  profileName: {
+    marginTop: 16,
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#1F2937",
   },
-  UserId: {
-    paddingTop: 8,
-    color: "gray",
-    fontSize: 22,
-    fontWeight: "semibold",
-  },
-  main: {
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    flex: 2,
-  },
-  analysisCard: {
-    position: "relative",
-    alignSelf: "center",
-    width: 336,
-    height: 213,
-    borderColor: "gray",
-    borderWidth: 1.5,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 8,
-  },
-  Analysis: {
-    padding: 10,
-    position: "absolute",
-    top: 0,
-    fontSize: 22,
+  userId: {
+    marginTop: 6,
+    color: "#6B7280",
+    fontSize: 16,
     fontWeight: "500",
   },
 
-  Analysisdes: {
-    padding: 8,
-    position: "absolute",
-    top: Platform.OS == "ios" ? "18%" : 38,
-    fontSize: 16,
-    color: "gray",
+  // Card Styles
+  card: {
+    width: "100%",
+    maxWidth: 500,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 3,
   },
-
-  BtnRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    top: Platform.OS == "ios" ? "50%" : 80,
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#1F2937",
+    marginBottom: 10,
   },
-  tite: {
-    textAlign: "center",
+  cardDescription: {
     fontSize: 15,
-    fontWeight: "semibold",
-  },
-  CvCard: {
-    position: "relative",
-    alignSelf: "center",
-    width: 336,
-    height: 163,
-    borderColor: "gray",
-    borderWidth: 1.5,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 8,
-  },
-  Cv: {
-    padding: 10,
-    position: "absolute",
-    top: 0,
-    fontSize: 22,
-    fontWeight: "500",
+    color: "#6B7280",
+    lineHeight: 22,
+    marginBottom: 16,
   },
 
-  Cvdes: {
-    padding: 8,
-    position: "absolute",
-    top: Platform.OS == "ios" ? "18%" : 38,
-    fontSize: 16,
-    color: "gray",
-  },
-  CvBtnRow: {
+  // Icon Row (Analysis)
+  iconRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    top: Platform.OS == "ios" ? "60%" : 100,
+    alignItems: "center",
+    marginTop: 10,
   },
-  upldBtn: {
-    backgroundColor: "#E86767",
-    paddingVertical: 13,
-    paddingHorizontal: 70,
-    borderRadius: 10,
-    fontSize: 18,
-    color: "#ffff",
+  iconButton: {
+    alignItems: "center",
+    flex: 1,
+  },
+  iconLabel: {
+    marginTop: 5,
+    fontSize: 15,
+    color: "black",
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  divider: {
+    width: 1,
+    height: 70,
+    backgroundColor: "#E5E7EB",
+  },
+
+  // Button Row (Post Job)
+  buttonRow: {
+    marginTop: 10,
+  },
+  postButton: {
+    backgroundColor: "#7A33DD",
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    shadowColor: "#7A33DD",
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
+  },
+  postButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "400",
   },
 });

@@ -34,7 +34,7 @@ const Login = () => {
         <View style={styles.joblist}>
           <Text style={styles.jblist}>Offers Posted</Text>
           <TouchableOpacity
-          // onPress={() => router.push("/recruiterScreens/JobOffer/postOffer")}
+            onPress={() => router.push("/(recruiter)/JobOffer/postOffer")}
           >
             <Text style={styles.jblist}>Post an offer</Text>
           </TouchableOpacity>

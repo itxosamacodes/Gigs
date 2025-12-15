@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-
+      <Stack.Screen name="JobOffer/postOffer" options={{ headerShown: false }} />
     </Stack>
   );
 }
