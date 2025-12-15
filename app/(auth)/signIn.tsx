@@ -52,7 +52,6 @@ const Login = () => {
     }
   };
 
-
   return (
     <View style={styles.container}>
       <TopBar titl="Sign In" />

@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PostOffers() {
   const [titel, setTitel] = useState("");
@@ -26,6 +27,7 @@ export default function PostOffers() {
       setErrorMsg("Please fills All the fields");
       return;
     }
+    const { data: { user } } = await supabase.auth.getUser()
     setLoading(true);
     const { error } = await supabase.from("job").insert([
       {
@@ -33,6 +35,7 @@ export default function PostOffers() {
         companyName: cmpny,
         companyLocation: location,
         jobDescription: description,
+        recruiter_id: user?.id
       },
     ]);
     setLoading(false);
@@ -40,53 +43,57 @@ export default function PostOffers() {
       setErrorMsg(error.message);
       return;
     } else {
-      router.push("/(recruiter)/(drawer)/home");
+      router.replace("/(recruiter)/(drawer)/home");
     }
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>New Offer</Text>
-      <View style={styles.formColumn}>
-        <TextInput
-          value={titel}
-          onChangeText={setTitel}
-          placeholder="Post title"
-          placeholderTextColor="#ccc"
-          style={styles.input}
-        />
-        <TextInput
-          value={cmpny}
-          onChangeText={setCmpny}
-          placeholder="Company name"
-          placeholderTextColor="#ccc"
-          style={styles.input}
-        />
-        <TextInput
-          value={location}
-          onChangeText={setLocation}
-          placeholder="Company location"
-          placeholderTextColor="#ccc"
-          style={styles.input}
-        />
-        <TextInput
-          value={description}
-          onChangeText={setDescription}
-          placeholder="Post description"
-          placeholderTextColor="#ccc"
-          style={styles.inputDesBox}
-        />
-        {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
 
-        <TouchableOpacity style={styles.nextBtn} onPress={jobPostingHandler} disabled={loading}>
-          {loading ? (
-            <ActivityIndicator size="small" color="white" />
-          ) : (
-            <Text style={styles.nextText}>POST</Text>
-          )}
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.title}>New Offer</Text>
+        <View style={styles.formColumn}>
+          <TextInput
+            value={titel}
+            onChangeText={setTitel}
+            placeholder="Post title"
+            placeholderTextColor="#ccc"
+            style={styles.input}
+          />
+          <TextInput
+            value={cmpny}
+            onChangeText={setCmpny}
+            placeholder="Company name"
+            placeholderTextColor="#ccc"
+            style={styles.input}
+          />
+          <TextInput
+            value={location}
+            onChangeText={setLocation}
+            placeholder="Company location"
+            placeholderTextColor="#ccc"
+            style={styles.input}
+          />
+          <TextInput
+            value={description}
+            onChangeText={setDescription}
+            placeholder="Post description"
+            placeholderTextColor="#ccc"
+            style={styles.inputDesBox}
+          />
+          {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
 
+          <TouchableOpacity style={styles.nextBtn} onPress={jobPostingHandler} disabled={loading}>
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text style={styles.nextText}>POST</Text>
+            )}
+          </TouchableOpacity>
+
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
+
   );
 }
 
@@ -106,7 +113,7 @@ const styles = StyleSheet.create({
   },
 
   formColumn: {
-    marginVertical: 170,
+    marginVertical: 140,
     width: 343,
     marginHorizontal: 30,
   },
