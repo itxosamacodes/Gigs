@@ -39,14 +39,14 @@ const Login = () => {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      router.replace("/(candidate)/(drawer)/home");
+      router.replace("/(recruiter)/(drawer)/home");
     }
   };
 
   const handleGoogle = async () => {
     try {
       await signInWithGoogle();
-      router.replace("/(candidate)/(drawer)/home");
+      // router.replace("/(candidate)/(drawer)/home");
     } catch (e: any) {
       console.error(e.message);
     }
