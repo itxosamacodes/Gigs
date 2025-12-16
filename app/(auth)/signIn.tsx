@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TextInput,
@@ -99,7 +100,7 @@ const Login = () => {
         {/* login button */}
         <TouchableOpacity onPress={LoginHandler} disabled={loading}>
           <Text style={styles.loginBtn}>
-            {loading ? "Logining..." : "Login"}
+            {loading ? <ActivityIndicator size={"small"} color={"white"} /> : "Login"}
           </Text>
         </TouchableOpacity>
         {/* forgot passwords btunss */}

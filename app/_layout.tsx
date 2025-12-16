@@ -1,24 +1,38 @@
-import { Stack } from "expo-router";
+import { supabase } from "@/utils/supabase";
+import { router, Stack } from "expo-router";
+import { useEffect } from "react";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  // useEffect(() => {
-  //   const checkUser = async () => {
-  //     const {
-  //       data: { user },
-  //     } = await supabase.auth.getUser();
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-  //     if (user) {
-  //       // User logged in → go to candidate dashboard
-  //       router.replace("/(candidate)/(drawer)/home");
-  //     } else {
-  //       // No user → go to login/index
-  //       router.replace("/");
-  //     }
-  //   };
+        if (!user) {
+          router.replace("/");
+          return;
+        }
 
-  //   checkUser();
-  // }, []);
+        const userRole = user.user_metadata?.role;
+
+        if (userRole === "candidate") {
+          router.replace("/(candidate)/(drawer)/home");
+        } else {
+          router.replace("/(recruiter)/(drawer)/home");
+        }
+      } catch (error) {
+        console.error("Error checking user:", error);
+        router.replace("/");
+      }
+    };
+
+    checkUser();
+  }, []);
+
+
 
   return (
     <Stack>
