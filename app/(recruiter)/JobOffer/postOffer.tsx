@@ -9,7 +9,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,7 +27,9 @@ export default function PostOffers() {
       setErrorMsg("Please fills All the fields");
       return;
     }
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     setLoading(true);
     const { error } = await supabase.from("job").insert([
       {
@@ -35,7 +37,7 @@ export default function PostOffers() {
         companyName: cmpny,
         companyLocation: location,
         jobDescription: description,
-        recruiter_id: user?.id
+        recruiter_id: user?.id,
       },
     ]);
     setLoading(false);
@@ -47,8 +49,12 @@ export default function PostOffers() {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#f7f9fc",
+      }}
+    >
       <View style={styles.container}>
         <Text style={styles.title}>New Offer</Text>
         <View style={styles.formColumn}>
@@ -82,18 +88,20 @@ export default function PostOffers() {
           />
           {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
 
-          <TouchableOpacity style={styles.nextBtn} onPress={jobPostingHandler} disabled={loading}>
+          <TouchableOpacity
+            style={styles.nextBtn}
+            onPress={jobPostingHandler}
+            disabled={loading}
+          >
             {loading ? (
               <ActivityIndicator size="small" color="white" />
             ) : (
               <Text style={styles.nextText}>POST</Text>
             )}
           </TouchableOpacity>
-
         </View>
       </View>
     </SafeAreaView>
-
   );
 }
 
@@ -134,6 +142,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   inputDesBox: {
+    fontSize: 15,
     height: 175,
     borderWidth: 1.2,
     backgroundColor: "#ffffff",

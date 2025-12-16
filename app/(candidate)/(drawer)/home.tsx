@@ -21,8 +21,10 @@ const Login = () => {
   };
   const [jobs, setJob] = useState<any[]>([]);
   const fetchAllJobs = async () => {
-    const { data: job, error } = await supabase.from("job").select("*").order("created_at", { ascending: false });
-    ;
+    const { data: job, error } = await supabase
+      .from("job")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (error) {
       console.log("error = : ", error.message);
     } else {
@@ -33,7 +35,9 @@ const Login = () => {
       }
     }
   };
-  useEffect(() => { fetchAllJobs() }, [])
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
   return (
     <View style={styles.container}>
       {/* =====> Header Section  */}
@@ -80,19 +84,15 @@ const Login = () => {
               <TouchableOpacity style={styles.saveButton} activeOpacity={0.7}>
                 <Ionicons name="bookmark-outline" size={22} color="white" />
               </TouchableOpacity>
-
             </View>
             <View style={styles.tit}>
               <Text style={styles.txtS}>{job.companyLocation}</Text>
             </View>
             <View style={styles.destit}>
               <Text style={styles.destxtS}>{job.companyName}</Text>
-              <Text style={styles.descraption}>
-                {job.jobDescription}
-              </Text>
+              <Text style={styles.descraption}>{job.jobDescription}</Text>
             </View>
           </View>
-
         ))}
       </ScrollView>
     </View>
@@ -171,17 +171,19 @@ const styles = StyleSheet.create({
     position: "relative",
     marginTop: 30,
     width: 376,
-    backgroundColor: "#ffffff",
     height: 217,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    borderWidth: 1,
     borderColor: "#E5E7EB",
-    borderWidth: 1.3,
-    elevation: 6,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 6,
+    overflow: "hidden",
   },
+
   crdRow: {
     position: "absolute",
     top: 10,
