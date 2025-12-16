@@ -90,7 +90,7 @@ const Login = () => {
                     router.push("/(candidate)/Jobs/Aplied");
                   }}
                 >
-                  <Text style={styles.aplyBtn}>Delet</Text>
+                  <Text style={styles.aplyBtn}>Delete</Text>
                 </TouchableOpacity>
               </View>
               {/* jobs location here */}
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     position: "fixed",
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f7f9fc",
   },
   // Header start here
   topRow: {

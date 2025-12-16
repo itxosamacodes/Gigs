@@ -47,11 +47,11 @@ const Login = () => {
       const userRole = user?.user_metadata?.role;
 
       if (userRole === "candidate") {
-        router.push("/(candidate)/(drawer)/home");
+        router.replace("/(candidate)/(drawer)/home");
 
       }
       else {
-        router.push("/(recruiter)/(drawer)/home");
+        router.replace("/(recruiter)/(drawer)/home");
       }
       setErrorMsg("");
 
