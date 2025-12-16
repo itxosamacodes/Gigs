@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#f3f4f6d0",
+    backgroundColor: "#f7f9fc",
   },
   pagetitle: {
     fontSize: 22,
@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
   inputs: {
     marginTop: 35,
     paddingLeft: 20,
-    backgroundColor: "#fff",
-    // borderWidth: 1.2,
-    borderColor: "grey",
+    backgroundColor: "#ffffff",
+    borderWidth: 1.2,
+    borderColor: "#E5E7EB",
     color: '#111827',
     height: 58.4,
     width: 353,
@@ -170,8 +170,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowOffset: { width: 2, height: 3 },
     shadowRadius: 8,
-
-    // Android shadow
     elevation: 10,
 
   },
@@ -185,6 +183,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#FFFFFF",
     paddingVertical: 14,
+    height: 55,
   },
   error: {
     color: "red",
