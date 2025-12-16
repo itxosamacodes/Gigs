@@ -33,10 +33,16 @@ const styles = StyleSheet.create({
     position: "relative",
     marginTop: 30,
     width: 376,
+    backgroundColor: "#ffffff",
     height: 217,
-    borderWidth: 1,
     borderRadius: 10,
-    borderColor: "grey",
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+
+    elevation: 6,
   },
   crdRow: {
     position: "absolute",
