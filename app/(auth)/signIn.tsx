@@ -184,6 +184,11 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     paddingVertical: 14,
     height: 55,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 2, height: 3 },
+    shadowRadius: 8,
+    elevation: 10,
   },
   error: {
     color: "red",
@@ -202,8 +207,13 @@ const styles = StyleSheet.create({
     width: 353,
     backgroundColor: "#FFFFFF",
     borderRadius: 50,
-    paddingVertical: 12,
+    paddingVertical: 16,
     gap: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 2, height: 3 },
+    shadowRadius: 8,
+    elevation: 10,
 
   },
 
