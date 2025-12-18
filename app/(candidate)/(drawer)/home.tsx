@@ -35,12 +35,50 @@ const Login = () => {
       }
     }
   };
+  // const savedJobHandler = async (jobId: number) => {
+  //   const { data: { user } } = await supabase.auth.getUser(),
+  //     user_id = user?.id
+  //   const { error } = await supabase
+  //     .from("isSaved").insert({
+  //       user_id: user_id,
+  //       job_id: jobId,
+  //     })
+
+  //   if (error) {
+  //     console.log("saved error =", error.message);
+  //   } else {
+  //     router.push("/(candidate)/Jobs/SaveJob");
+  //   }
+  // };
+  const jobPostingHandler = async (job_id: any) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { error } = await supabase.from("saveJob").insert([
+      {
+        jobTitel: job_id.titel,
+        companyName: job_id.cmpny,
+        companyLocation: job_id.location,
+        jobDescription: job_id.description,
+        user_id: user?.id,
+      },
+    ]);
+
+    if (error) {
+      console.log(error.message);
+      return;
+    } else {
+      // router.replace("/(recruiter)/(drawer)/home");
+    }
+  };
+
   useEffect(() => {
     fetchAllJobs();
   }, []);
   return (
     <View style={styles.container}>
-      {/* =====> Header Section  */}
+      {/*Header Section*/}
       <View style={styles.topRow}>
         <View>
           <Text style={styles.pageTitel}>Welcome Osama</Text>
@@ -53,7 +91,7 @@ const Login = () => {
       </View>
 
       <ScrollView>
-        {/* =====> Search / Filter Section  */}
+        {/*Search / Filter Section*/}
         <View style={styles.formColumn}>
           <TextInput
             placeholder="job title, category"
@@ -71,18 +109,27 @@ const Login = () => {
           </TouchableOpacity>
         </View>
 
-        {/* =====> Jobs List Header Section  */}
+        {/*Jobs List Header Section */}
         <View style={styles.joblist}>
-          <Text style={styles.jblist}>Available Position</Text>
+          <TouchableOpacity
+            onPress={() => {
+              fetchAllJobs();
+            }}
+          >
+            <Text style={styles.jblist}>Available Position</Text>
+          </TouchableOpacity>
         </View>
 
-        {/* =====> Job Cards Section */}
+        {/*Job Cards Section*/}
         {jobs.map((job) => (
           <View style={styles.jobCard} key={job.id}>
             <View style={styles.crdRow}>
               <Text style={styles.jobTit}>{job.jobTitel}</Text>
-              <TouchableOpacity style={styles.saveButton} activeOpacity={0.7}>
-                <Ionicons name="bookmark-outline" size={22} color="white" />
+              <TouchableOpacity
+                style={styles.saveButton}
+                onPress={() => jobPostingHandler(job.id)}
+              >
+                <Ionicons name="bookmark-outline" size={22} color="#7A33DD" />
               </TouchableOpacity>
             </View>
             <View style={styles.tit}>
@@ -204,9 +251,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 15,
     borderRadius: 8,
-    backgroundColor: "#7A33DD",
+    backgroundColor: "#F9FAFB",
     borderWidth: 1,
     borderColor: "#E5E7EB",
+  },
+  savedButton: {
+    backgroundColor: "#7A33DD",
+    borderColor: "#7A33DD",
   },
   tit: {
     marginTop: 40,

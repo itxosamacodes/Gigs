@@ -353,6 +353,7 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         borderRadius: 12,
         gap: 8,
+
     },
     primaryButton: {
         shadowColor: "#7A33DD",

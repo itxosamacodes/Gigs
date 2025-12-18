@@ -23,7 +23,7 @@ const Login = () => {
       data: { user },
       error: userError,
     } = await supabase.auth.getUser();
-    console.log(" users name equal = :", user)
+
     if (userError || !user) {
       console.log("No user found");
       return;
@@ -37,18 +37,32 @@ const Login = () => {
     if (error) {
       console.log(error.message);
     } else {
-      // if (job) {
       {
         setJobs(job);
       }
-      // } else {
-      //   setJobs([]);
-      // }
-      // If Supabase returns no jobs (null/undefined),
-      // set an empty array instead.
-      // This prevents app crashes when using jobs.map()
     }
   };
+  const PostDeleter = async (post_id: number) => {
+    console.log("Job Id equal to = : ", post_id);
+
+    const { data, error } = await supabase
+      .from("job")
+      .delete()
+      .eq("id", post_id)
+      .select();
+
+    if (error) {
+      console.log("Delete error:", error.message);
+      return false;
+    }
+
+    console.log("Post deleted:", data);
+
+    FetchOfferJobs();
+    return true;
+  };
+
+
 
   useEffect(() => {
     FetchOfferJobs();
@@ -86,10 +100,7 @@ const Login = () => {
               <View style={styles.crdRow}>
                 <Text style={styles.jobTit}>{job.jobTitel}</Text>
                 <TouchableOpacity
-                  onPress={() => {
-                    router.push("/(candidate)/Jobs/Aplied");
-                  }}
-                >
+                  onPress={() => { PostDeleter(job.id); }}>
                   <Text style={styles.aplyBtn}>Delete</Text>
                 </TouchableOpacity>
               </View>
@@ -134,7 +145,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontWeight: "600",
     fontFamily: "Poppins",
-
   },
   manuBtn: {
     position: "relative",
@@ -229,6 +239,5 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     fontSize: 14,
   },
-
 });
 export default Login;

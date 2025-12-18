@@ -12,7 +12,7 @@ export default function JobTabs() {
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.topRow}>
-        <Text style={styles.pageTitle}>Usama {}</Text>
+        <Text style={styles.pageTitle}>Usama { }</Text>
 
         <TouchableOpacity style={styles.menuBtn}>
           <Ionicons name="menu" size={40} color="white" />
@@ -21,7 +21,7 @@ export default function JobTabs() {
 
       <View style={{ flex: 1 }}>
         <Tab.Navigator
-          initialRouteName="Applied Job"
+          initialRouteName="Saved Job"
           screenOptions={{
             tabBarIndicatorStyle: {
               backgroundColor: "#7A33DD",
@@ -39,8 +39,9 @@ export default function JobTabs() {
             },
           }}
         >
-          <Tab.Screen name="Applied Job" component={Applied} />
           <Tab.Screen name="Saved Job" component={SaveJob} />
+          <Tab.Screen name="Applied Job" component={Applied} />
+
         </Tab.Navigator>
       </View>
     </View>
