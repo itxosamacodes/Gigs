@@ -40,6 +40,29 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Gigs to use your location."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "config": {
+              "googleMaps": {
+                "apiKey": "pk.eyJ1IjoianVuYWlkdW1yIiwiYSI6ImNtajdjaDRseDAydDIzZXNqejhra3BiaGgifQ.F-f698qH9ez3nyQzbY6wlg"
+              }
+            }
+          },
+          "ios": {
+            "config": {
+              "googleMapsApiKey": "pk.eyJ1IjoianVuYWlkdW1yIiwiYSI6ImNtajdjaDRseDAydDIzZXNqejhra3BiaGgifQ.F-f698qH9ez3nyQzbY6wlg"
+            }
+          }
+        }
       ]
     ],
     "experiments": {
