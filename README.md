@@ -182,8 +182,8 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 👤 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- GitHub: [ItxosamaCodes](https://github.com/itxosamacodes)
+- LinkedIn: [Muhammad Osama](https://www.linkedin.com/in/muhammad-osama-10b16a253/)
 
 ## 🙏 Acknowledgments
 
